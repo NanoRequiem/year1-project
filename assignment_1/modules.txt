@@ -1,0 +1,8 @@
+pgmEcho methods
+
+main(int argc, char **argv)
+
+Main method will be used to take in arguments from the command line. The main method will then call
+subsequent modules to check the program is running 
+
+
