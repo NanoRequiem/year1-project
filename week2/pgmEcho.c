@@ -7,6 +7,7 @@
 #define XBOF 3
 
 #define MNRP 0x3550
+
 #define MNAP 0x3250
 #define MNID 1
 #define MXID 65536
@@ -40,7 +41,7 @@ int main(int argc, char **argv){
 	return XBIF;}}
 	else ungetc(nC,iF);
 	sC=fscanf(iF," %u %u %u",&w,&h,&mG);
-	if ((sC!=1)||(w<MNID)||(w>MXID)||(h<MNID)||(h>MXID)||(mG!=255)){
+	if ((sC!=3)||(w<MNID)||(w>MXID)||(h<MNID)||(h>MXID)||(mG!=255)){
 	free(cL);
 	fclose(iF);
 	printf("ERROR!\n");	
@@ -53,10 +54,11 @@ int main(int argc, char **argv){
 	printf("ERROR!\n");
 	return XBIF;}
 	unsigned char*nGV;
-	for (nGV=iD;nGV<iD+nIB;nGV++);{
+	for (nGV=iD;nGV<iD+nIB;nGV++){
 	int gV;
 	int sC=fscanf(iF," %u",&gV);
-	if ((!(sC-1))||(gV<0)||(gV>255)){
+
+	if (sC!=1||gV<0||gV>255){
 	free(cL);
 	free(iD);	
 	fclose(iF);
@@ -85,3 +87,4 @@ int main(int argc, char **argv){
 	return XBOF; }}
 	return XNE;	
 	} /* main() */
+
