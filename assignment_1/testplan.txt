@@ -1,0 +1,5 @@
+Test Plan for pgm Utilities
+
+My main tests will be compromised of automatic tests running files that should pass, be on the
+ boundaries of passing and failing and actually failed tests. There should be a failed test for
+each validation made within the program to make sure each validation check works.
