@@ -1,8 +1,53 @@
+Methods to read in a file
+
+
+validateCmdArguments(int requiredArguments, int argc)
+
+This method is called to check the number of arguments in the command line.
+
+initializeImage(char *fileName)
+
+This method takes in the file name and makes sure that it is an existing file. It also dynamically
+initializes the image data struct.
+
+readFile(char *filename, image *readImage)
+
+This method takes in the initialized image struct and then assigns the data values of the images.
+Validating the data as it comes in and only allowing in data that is valid. If the data is not valid
+freeData(image *readImage) is called.
+
+freeData(image *readImage)
+
+This method checks if any given data value is NULL and if it is not NULL it is freed before the 
+program is closed.
+
+
 pgmEcho methods
+
 
 main(int argc, char **argv)
 
 Main method will be used to take in arguments from the command line. The main method will then call
-subsequent modules to check the program is running 
+subsequent modules to check the program is running. The main method will call a method to take in
+the file that it has read. Once the saved file has passed a different validation method it will then
+finally call a module to copy the files data. 
 
+copy(image *readImage)
+
+Copy method will take the file that has been read in and copy it to another pgm file. It will then validate
+the image it created
+
+
+pgmComp methods
+
+
+main(int argc, char **argv)
+
+method takes in command line arguments and passes them to validateCmdArguments for validation. If it passes
+validation it calls the read file methods on both files to compare and if they open and are saved it then calls
+the Compare method.
+
+Compare(image *firstImage, image *secondImage)
+
+Method takes in 2 image structs and compares them to make sure they're correct and ignoring whitespace on the images.
 
