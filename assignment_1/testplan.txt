@@ -2,4 +2,9 @@ Test Plan for pgm Utilities
 
 My main tests will be compromised of automatic tests running files that should pass, be on the
  boundaries of passing and failing and actually failed tests. There should be a failed test for
-each validation made within the program to make sure each validation check works.
+each validation made within the program to make sure each validation check works. These tests will
+also include empty inputs, incorrect file types, incorrect file names and files with extra white space.
+
+These tests are to make sure that validation runs correctly and that the programs are not allowed
+to run if an error will occur. These tests will be ran through the creation of bash scripts with expected
+outputs in order to reduce the risk of human error in testing and to speed up testing considerably.
