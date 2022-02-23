@@ -21,6 +21,10 @@ freeData(image *readImage)
 This method checks if any given data value is NULL and if it is not NULL it is freed before the 
 program is closed.
 
+outputImage(image *outImage)
+
+This method will use the saved data within the image struct to output an image file.
+
 
 pgmEcho methods
 
@@ -51,3 +55,69 @@ Compare(image *firstImage, image *secondImage)
 
 Method takes in 2 image structs and compares them to make sure they're correct and ignoring whitespace on the images.
 
+
+pgma2b methods
+
+
+main(int argc, char **argv)
+
+Main method takes in arguments and validates them using validateCmdArguments. The method will then open the file
+and pass it into another method to read in the ascii file data using a modified version of the image data struct in order
+to save ascii files. This will then call another method to convert the data into a data that can be stored in a binary file
+
+aToBin(asciiImage *readImage)
+
+Method to use saved ascii file and convert it into a binary file.
+
+binValidate(binImage *outImage)
+
+Method takes in converted file and validates it making sure that it can be written to a file
+
+binOutput(binImage *outImage, char *outFile)
+
+Takes image after it has been validated and outputs it to a file.
+
+
+pgmb2a
+
+pgmb2a contains the same methods as pgma2b however it will be in the opposite direction (binary -> ascii)
+
+
+pgmReduce
+
+Main
+
+This method will once again take in and validate arguments and once arguments are validated it will open and save
+the file using the appropriate methods. Once the file is read in it will call the reduce method
+
+reduce
+
+This method will loop through the 2d array of saved points and write the ones that correspond to the reduction factor
+to a new image.
+
+
+pgmTile
+
+main(int argc, char **argv)
+
+main method takes in and validates arguments and once arguments are validated it reads in the specified file. 
+Once it has read in a file it calls the tile method.
+
+tile(image *readImage, int reductionFactor)
+
+This will first loop through and clone all of the header information required for each output file. Afterwards it will then
+loop through the 2d array for the inputted image and split it into different arrays to then be outputted into smaller files.
+It will then loop through every new image saved and output them to a file using the output methods/
+
+
+pgmAssemble
+
+main
+
+Main method takes in arguments and validates them. The main method will then go through each input image and make sure they are
+the correct height and width before calling the read in methods to handle them. After this it will then call the assemble method.
+
+assemble
+
+this method will take the read data from each image and arrange them into a new 2d array validating that they're in the correct place
+using their file names. It will then output the image to a file using the outputImage method.
