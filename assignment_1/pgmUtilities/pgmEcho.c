@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-
+#include "readFile.h"
 
 
 //Main method for reading in cmd line arguments
@@ -14,9 +14,10 @@ int main(int argc, char **argv)
 {
 	//Call method to check the number of cmd line arguements
 	//if returns false error the program and exit
-	if(validateCmdArguments(3, argc))
+	if(validateCmdArguments(3, argc) == 0)
 	{
 		printf("ERROR: Bad argument count");
 		return 1;
 	}
+
 } 
