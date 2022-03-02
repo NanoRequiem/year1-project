@@ -4,4 +4,6 @@
 //validateCmdArguments validates the command line arguments
 int validatecmdArguments(int requiredArguments, int argc);
 
-int ReadImage(Image *inputImage, FILE *data);
+int initImage(Image *inputImage, FILE *data);
+
+int ReadImageHead(Image *inputImage, FILE *data);

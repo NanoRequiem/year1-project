@@ -3,8 +3,10 @@
 typedef struct
 {
   unsigned char magicNumber[2];
-  int width, height;
-  int maxGray;
+  unsigned short *magic_Number;
+  char *commentLine;
+  unsigned int width, height;
+  unsigned int maxGray;
 
   int **imageData;
 } Image;
