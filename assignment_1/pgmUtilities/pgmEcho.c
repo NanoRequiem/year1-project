@@ -19,8 +19,5 @@ int main(int argc, char **argv)
 		printf("ERROR: Bad argument count\n");
 		return 1;
 	}
-	else
-	{
-		printf("lmao\n");
-	}
+	
 }
