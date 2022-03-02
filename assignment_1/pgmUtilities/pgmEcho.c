@@ -14,10 +14,13 @@ int main(int argc, char **argv)
 {
 	//Call method to check the number of cmd line arguements
 	//if returns false error the program and exit
-	if(validateCmdArguments(3, argc) == 0)
+	if(validateCmdArguments(3, argc) == 1)
 	{
-		printf("ERROR: Bad argument count");
+		printf("ERROR: Bad argument count\n");
 		return 1;
 	}
-
-} 
+	else
+	{
+		printf("lmao\n");
+	}
+}

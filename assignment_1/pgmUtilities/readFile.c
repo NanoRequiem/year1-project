@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "readFile.h"
+
 
 //Method to check the cmd line inputs
 //
