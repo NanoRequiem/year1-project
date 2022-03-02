@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "readFile.h"
 #include "imageStructures.h"
+#include "readFile.h"
 
 //Main method for reading in cmd line arguments
 //
@@ -21,8 +21,8 @@ int main(int argc, char **argv)
 	}
 
 	//Create the image structure
+	Image *inputImage = (Image *)malloc( sizeof(Image) );
 
-	//struct Image *inputImage;
 
 	//Open inputted file
 	FILE *data;
@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 		printf("ERROR: Bad File Name(%s)\n", argv[1]);
 		return 2;
 	}
-	else {
-		printf("Open\n");
-	}
+
+	//Calling the InitImage method to initialize the struct
+	InitImage(inputImage, data);
 }

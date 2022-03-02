@@ -6,5 +6,5 @@ typedef struct
   int width, height;
   int maxGray;
 
-  int **imageData[65536][65536];
+  int **imageData;
 } Image;

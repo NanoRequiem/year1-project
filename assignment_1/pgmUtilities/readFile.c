@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "readFile.h"
 #include "imageStructures.h"
+#include "readFile.h"
 
 //Method to check the cmd line inputs
 //
@@ -20,4 +20,12 @@ int validateCmdArguments(int requiredArguments, int argc)
 	{
 		return 0;
 	}
+}
+
+//Method to initialize and check the values found in the Image struct
+//inputImage - The struct where we are going to save the file's data
+//data - The file that the data is being read from
+int InitImage(Image *inputImage, FILE *data)
+{
+	return 0;
 }
