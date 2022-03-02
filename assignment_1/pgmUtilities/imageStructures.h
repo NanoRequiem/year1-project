@@ -2,7 +2,7 @@
 
 typedef struct
 {
-  char *magic_number[2];
+  unsigned char magicNumber[2];
   int width, height;
   int maxGray;
 

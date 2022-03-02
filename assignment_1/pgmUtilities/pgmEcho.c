@@ -36,5 +36,14 @@ int main(int argc, char **argv)
 	}
 
 	//Calling the InitImage method to initialize the struct
-	InitImage(inputImage, data);
+	//The integer readStatus will hold whether the data was
+	//read in correctly or not.
+	int readStatus = ReadImage(inputImage, data);
+
+	//if the data read in was not successful output file name and error code;
+	if(readStatus != 0)
+	{
+		printf("(%s)\n", argv[1]);
+		return readStatus;
+	}
 }
