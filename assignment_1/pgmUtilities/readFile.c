@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "readFile.h"
-
+#include "imageStructures.h"
 
 //Method to check the cmd line inputs
 //

@@ -1,9 +1,10 @@
 //Contains the structures to store image files
-typedef struct _image
+
+typedef struct
 {
-  char magic_number[2];
+  char *magic_number[2];
   int width, height;
   int maxGray;
 
-  int **imageData[width][height];
-}
+  int **imageData[65536][65536];
+} Image;
