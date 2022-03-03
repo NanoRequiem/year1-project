@@ -52,4 +52,6 @@ int main(int argc, char **argv)
 	//Close the file since we have read everything we need from it
 	fclose(data);
 
+	//Calling module to output read in data to a file
+	int outStatus = outputImage(inputImage, argv[2]);
 }
