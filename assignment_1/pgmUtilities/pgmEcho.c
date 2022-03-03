@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 	//The integer readStatus will hold whether the data was
 	//read in correctly or not.
 	initImage(inputImage, data);
-	int readStatus = ReadImageHead(inputImage, data);
+	int readStatus = readImageHead(inputImage, data);
 
 	//if the data read in was not successful output file name and error code;
 	if(readStatus != 0)

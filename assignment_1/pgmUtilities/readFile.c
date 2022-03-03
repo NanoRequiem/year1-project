@@ -45,7 +45,7 @@ int initImage(Image *inputImage, FILE *data)
 //Method to initialize and read in the image Header information
 //inputImage - The struct where we are going to save the file's data
 //data - The file that the data is being read from
-int ReadImageHead(Image *inputImage, FILE *data)
+int readImageHead(Image *inputImage, FILE *data)
 {
 	//Initializes magicNumber
 	unsigned short *magic_Number = (unsigned short *) inputImage->magicNumber;
@@ -94,8 +94,6 @@ int ReadImageHead(Image *inputImage, FILE *data)
 											&(inputImage->height),
 											&(inputImage->maxGray));
 
-	printf("width = %d, height = %d, maxGray = %d\n", inputImage->width, inputImage->height, inputImage->maxGray);
-
 	//Validation checks for the width and heightvalues
 	if(inputImage->width < 1 || inputImage->width > 65536 ||
 		inputImage->height < 1 || inputImage->height > 65536)
@@ -110,5 +108,22 @@ int ReadImageHead(Image *inputImage, FILE *data)
 		printf("ERROR: Bad Max GrayValue ");
 		return 6;
 	}
+	return 0;
+}
+
+//Method to read in the specific values of each point of the image
+//inputImage - The struct where we are going to save the file's data
+//data - The file that the data is being read from
+int readImageData(Image *inputImage, FILE *data)
+{
+	//Initializing the rows of the 2D array to store the image data
+	inputImage->imageData = (char**)malloc(inputImage->height * sizeof(char*));
+
+	//For loop to initialize the columns of the array
+	for(int x = 0; x < inputImage->height; x++)
+	{
+		inputImage->imageData[x] = (char*)malloc(inputImage->width * sizeof(char));
+	}
+
 	return 0;
 }
