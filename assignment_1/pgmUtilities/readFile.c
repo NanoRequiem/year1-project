@@ -108,7 +108,9 @@ int readImageHead(Image *inputImage, FILE *data)
 		printf("ERROR: Bad Max GrayValue ");
 		return 6;
 	}
-	return 0;
+
+	int imageDataStatus = readImageData(inputImage, data);
+	return imageDataStatus;
 }
 
 //Method to read in the specific values of each point of the image
@@ -117,12 +119,32 @@ int readImageHead(Image *inputImage, FILE *data)
 int readImageData(Image *inputImage, FILE *data)
 {
 	//Initializing the rows of the 2D array to store the image data
-	inputImage->imageData = (char**)malloc(inputImage->height * sizeof(char*));
+	inputImage->imageData = (int**)malloc(inputImage->height * sizeof(int*));
 
 	//For loop to initialize the columns of the array
 	for(int x = 0; x < inputImage->height; x++)
 	{
-		inputImage->imageData[x] = (char*)malloc(inputImage->width * sizeof(char));
+		inputImage->imageData[x] = (int*)malloc(inputImage->width * sizeof(int));
+	}
+
+	//For loop that goes through all of the image's data and saves it
+	//First for loop goes through the rows of the 2d array where as the
+	//second for loop goes through the columns of the 2d array.
+	for(int y = 0; y < inputImage->height; y++)
+	{
+		for(int x = 0; x < inputImage-> width; x++)
+		{
+			//Captures data from file for the imageData 2d array
+			int scanCount = fscanf(data, " %u",&(inputImage->imageData[y][x]));
+
+			//Validation check on the captured data
+			if(inputImage->imageData[y][x] < 0 ||
+					inputImage->imageData[y][x] > 255)
+			{
+				printf("ERROR: Bad Data ");
+				return 8;
+			}
+		}
 	}
 
 	return 0;

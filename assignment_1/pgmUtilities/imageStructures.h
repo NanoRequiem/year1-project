@@ -8,5 +8,5 @@ typedef struct
   unsigned int width, height;
   unsigned int maxGray;
 
-  char **imageData;
+  int **imageData;
 } Image;
