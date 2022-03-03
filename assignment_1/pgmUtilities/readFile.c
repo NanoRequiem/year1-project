@@ -89,10 +89,26 @@ int ReadImageHead(Image *inputImage, FILE *data)
 	}
 
 	//Reads in header information
-	//scanCount = fscanf(data, " %u %u %u",
-											//inputImage->width,
-											//inputImage->height,
-											//inputImage->maxGray);
-	//printf("width = %d, height = %d, maxGray = %d\n", inputImage->width, inputImage->height, inputImage->maxGray);
+	scanCount = fscanf(data, " %u %u %u",
+											&(inputImage->width),
+											&(inputImage->height),
+											&(inputImage->maxGray));
+
+	printf("width = %d, height = %d, maxGray = %d\n", inputImage->width, inputImage->height, inputImage->maxGray);
+
+	//Validation checks for the width and heightvalues
+	if(inputImage->width < 1 || inputImage->width > 65536 ||
+		inputImage->height < 1 || inputImage->height > 65536)
+	{
+		printf("ERROR: Bad Dimensions");
+		return 5;
+	}
+
+	//Validation check for maxGray value
+	if(inputImage->maxGray != 255)
+	{
+		printf("ERROR: Bad Max GrayValue ");
+		return 6;
+	}
 	return 0;
 }
