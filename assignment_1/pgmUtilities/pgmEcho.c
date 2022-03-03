@@ -54,4 +54,14 @@ int main(int argc, char **argv)
 
 	//Calling module to output read in data to a file
 	int outStatus = outputImage(inputImage, argv[2]);
+
+	//output message if the program fails to output a file
+	if(outStatus != 0)
+	{
+		printf("(%s)\n", argv[1]);
+		return outStatus;
+	}
+	//Output message if the program successfully executes
+	printf("ECHOED\n");
+	return 0;
 }

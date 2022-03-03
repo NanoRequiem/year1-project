@@ -7,6 +7,9 @@
 
 int outputImage(Image *inputImage, char *outFile)
 {
+  //int to keep track of how much has been written to the output file
+  int writtenData;
+
   //Opening file using user supplied name
   FILE *outputFile = fopen(outFile, "w");
 
@@ -23,34 +26,49 @@ int outputImage(Image *inputImage, char *outFile)
   //present
   if(inputImage->commentLine == NULL)
   {
-    int writtenData = fprintf(outputFile, "%s\n\n%d\n%d %d\n",
+    writtenData = fprintf(outputFile, "%s\n\n%d %d\n%d\n",
                               inputImage->magicNumber,
-                              inputImage->maxGray,
                               inputImage->width,
-                              inputImage->height);
+                              inputImage->height,
+                              inputImage->maxGray);
   }
   else
   {
-    int writtenData = fprintf(outputFile, "%s\n%d\n%d %d\n",
+    writtenData = fprintf(outputFile, "%s\n%s\n\n%d %d\n%d",
                               inputImage->magicNumber,
                               inputImage->commentLine,
-                              inputImage->maxGray,
                               inputImage->width,
-                              inputImage->height);
+                              inputImage->height,
+                              inputImage->maxGray);
   }
 
   //validating that the output occured
   if(writtenData < 0)
   {
-    printf("ERROR: Output Failed")
+    printf("ERROR: Output Failed");
     return 9;
   }
 
-  //Writing the image data to the output file
+  //Resetting written data to track imageData outputs
+  writtenData = 0;
 
+  //Writing the image data to the output file
+  for(int x = 0; x < inputImage->height; x++)
+  {
+    //writing data from the imageData array to the file
+    writtenData = fprintf(outputFile, "%d", inputImage->imageData[x][0]);
+
+    //Sub for loop to write the rest of each array within the 2d array
+    for(int y = 1; y < inputImage->width; y++)
+    {
+      writtenData = fprintf(outputFile, " %d", inputImage->imageData[x][y]);
+    }
+    //End of current line so print a new line to file
+    writtenData = writtenData + fprintf(outputFile, "\n");
+  }
 
   //Closing the output file as we do not need it anymore
-
+  fclose(outputFile);
 
   return 0;
 }
