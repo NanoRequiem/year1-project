@@ -4,6 +4,7 @@
 
 #include "imageStructures.h"
 #include "readFile.h"
+#include "outputFile.h"
 
 //Main method for reading in cmd line arguments
 //
@@ -47,4 +48,8 @@ int main(int argc, char **argv)
 		printf("(%s)\n", argv[1]);
 		return readStatus;
 	}
+
+	//Close the file since we have read everything we need from it
+	fclose(data);
+
 }
