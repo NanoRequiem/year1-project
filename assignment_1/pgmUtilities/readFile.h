@@ -8,3 +8,5 @@ int initImage(Image *inputImage, FILE *data);
 
 int readImageHead(Image *inputImage, FILE *data);
 int readImageData(Image *inputImage, FILE *data);
+
+int freeData(Image *inputImage);

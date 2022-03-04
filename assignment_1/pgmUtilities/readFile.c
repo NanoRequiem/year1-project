@@ -58,6 +58,9 @@ int readImageHead(Image *inputImage, FILE *data)
 	if (*magic_Number != MAGIC_NUMBER_ASCII_PGM)
 	{
 		printf("ERROR: Bad Magic Number");
+
+		freeData(inputImage);
+
 		return 1;
 	}
 
@@ -80,6 +83,9 @@ int readImageHead(Image *inputImage, FILE *data)
 		if(comment == NULL)
 		{
 			printf("ERROR: Bad Comment Line");
+
+			freeData(inputImage);
+
 			return 4;
 		}
 	}
@@ -99,6 +105,9 @@ int readImageHead(Image *inputImage, FILE *data)
 		inputImage->height < 1 || inputImage->height > 65536)
 	{
 		printf("ERROR: Bad Dimensions");
+
+		freeData(inputImage);
+
 		return 5;
 	}
 
@@ -142,10 +151,47 @@ int readImageData(Image *inputImage, FILE *data)
 					inputImage->imageData[y][x] > 255)
 			{
 				printf("ERROR: Bad Data ");
+
+				freeData(inputImage);
+
 				return 8;
 			}
 		}
 	}
 
 	return 0;
+}
+
+//Module to free data should any part fail
+int freeData(Image *inputImage)
+{
+	//Checks if each piece of data within the struct is allocated
+	//if it is allocated the data is freed
+	//First checks magicNumber
+	if(inputImage->magicNumber != NULL)
+	{
+		free(inputImage->magicNumber);
+	}
+	//Checks magic_Number
+	if(inputImage->magic_Number != NULL)
+	{
+		free(inputImage->magic_Number);
+	}
+	//Checks commentLine
+	if(inputImage->commentLine != NULL)
+	{
+		free(inputImage->commentLine);
+	}
+	//Checks for image data then uses a for loop to free data backwards
+	if(inputImage->imageData != NULL)
+	{
+		for(int x = inputImage->height; x >= 0; x--)
+		{
+			free(inputImage->imageData[x]);
+		}
+		free(inputImage->imageData);
+	}
+
+	return 0;
+
 }

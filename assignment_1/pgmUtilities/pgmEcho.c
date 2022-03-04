@@ -33,6 +33,7 @@ int main(int argc, char **argv)
 	if(data == NULL)
 	{
 		printf("ERROR: Bad File Name(%s)\n", argv[1]);
+
 		return 2;
 	}
 
@@ -46,6 +47,10 @@ int main(int argc, char **argv)
 	if(readStatus != 0)
 	{
 		printf("(%s)\n", argv[1]);
+
+		//Close file since we've stopped using it due to error
+		fclose(data);
+
 		return readStatus;
 	}
 
