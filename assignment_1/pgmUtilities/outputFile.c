@@ -58,10 +58,30 @@ int outputImage(Image *inputImage, char *outFile)
     //writing data from the imageData array to the file
     writtenData = fprintf(outputFile, "%d", inputImage->imageData[x][0]);
 
+    //Check how many digits each number is to add the correct amount of spaces after each number
+    if(inputImage->imageData[x][0] < 10)
+    {
+      writtenData = fprintf(outputFile, "  ");
+    }
+    else if(inputImage->imageData[x][0] < 100)
+    {
+      writtenData = fprintf(outputFile, " ");
+    }
+
     //Sub for loop to write the rest of each array within the 2d array
     for(int y = 1; y < inputImage->width; y++)
     {
-      writtenData = fprintf(outputFile, " %d", inputImage->imageData[x][y]);
+      //Check how many digits each number is to add the correct amount of spaces before each number
+      if(inputImage->imageData[x][y] < 10)
+      {
+        writtenData = fprintf(outputFile, "  ");
+      }
+      else if(inputImage->imageData[x][y] < 100)
+      {
+        writtenData = fprintf(outputFile, " ");
+      }
+
+      writtenData = fprintf(outputFile, "%d", inputImage->imageData[x][y]);
     }
     //End of current line so print a new line to file
     writtenData = writtenData + fprintf(outputFile, "\n");
