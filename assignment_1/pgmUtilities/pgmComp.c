@@ -30,17 +30,68 @@ int main(int argc, char **argv)
   Image *secondImage = (Image *)malloc ( sizeof(Image) );
 
   //open the first image file
-
+  FILE *firstData;
+	firstData = fopen(argv[1], "r");
   //Check the first image file has been opened
+  if(firstData == NULL)
+	{
+		printf("ERROR: Bad File Name(%s)\n", argv[1]);
 
+		return 2;
+	}
 
   //read in data for the first image
+  initImage(firstImage, firstData);
+	int readStatus = readImageHead(firstImage, firstData);
+
+  //if the data read in was not successful output file name and error code;
+	if(readStatus != 0)
+	{
+		printf("(%s)\n", argv[1]);
+
+		//Close file since we've stopped using it due to error
+		fclose(firstData);
+
+		return readStatus;
+	}
 
   //open the second image
-
+  FILE *secondData;
+  secondData = fopen(argv[1], "r");
 
   //check the second image has been opened
+  if(firstData == NULL)
+	{
+		printf("ERROR: Bad File Name(%s)\n", argv[1]);
+
+		return 2;
+	}
 
   //Read in data for the second image
+  initImage(secondImage, secondData);
+	readStatus = readImageHead(firstImage, firstData);
+
+  //if the data read in was not successful output file name and error code;
+	if(readStatus != 0)
+	{
+		printf("(%s)\n", argv[1]);
+
+		//Close both files since we've stopped using it due to error
+		fclose(secondData);
+    fclose(firstData);
+
+		return readStatus;
+	}
+
+  //Call method to compare the data saved in both images
+  Comp(firstImage, secondImage);
+}
+
+
+//Method to compare the data from each then output if it was successful or not
+//firstImage - data stored for the first image inputted
+//secondImage - data stored for the second image inputted
+int Comp(Image *firstImage, Image *secondImage)
+{
 
 }
