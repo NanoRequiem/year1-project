@@ -84,7 +84,14 @@ int main(int argc, char **argv)
 	}
 
   //Call method to compare the data saved in both images
-  Comp(firstImage, secondImage);
+  int compStatus = Comp(firstImage, secondImage);
+
+  //if the comp method returns a success that meand the program is successful
+  //and should output the correct string to indicate.
+  if(compStatus == 0)
+  {
+
+  }
 }
 
 
@@ -93,5 +100,38 @@ int main(int argc, char **argv)
 //secondImage - data stored for the second image inputted
 int Comp(Image *firstImage, Image *secondImage)
 {
+  if(firstImage->magicNumber != secondImage->magicNumber)
+  {
 
+  }
+
+
+  else if(firstImage->commentLine != secondImage->commentLine)
+  {
+
+  }
+
+  else if(firstImage->width != secondImage->width ||
+          firstImage->height != secondImage->height)
+  {
+
+  }
+
+  else if(firstImage->maxGray != secondImage->maxgray)
+  {
+
+  }
+
+  for(int x = 0; x < firstImage->height; x++)
+  {
+    for(int y = 0; y < firstImage->width; y++)
+    {
+      if(firstImage->imageData[x][y] != secondImage->imageData[x][y])
+      {
+
+      }
+    }
+  }
+
+  return 0;
 }
