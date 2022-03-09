@@ -53,7 +53,7 @@ int readImageHead(Image *inputImage, FILE *data)
 	//Saves magicNumber from file
 	inputImage->magicNumber[0] = getc(data);
 	inputImage->magicNumber[1] = getc(data);
-
+	
 	//Checks if magic numebr is correct
 	if (*magic_Number != MAGIC_NUMBER_ASCII_PGM)
 	{

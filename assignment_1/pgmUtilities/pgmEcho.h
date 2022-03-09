@@ -3,4 +3,4 @@
 //
 //Main method to read in cmd line arguments
 
-void main(int argc, char **argv);
+int main(int argc, char **argv);

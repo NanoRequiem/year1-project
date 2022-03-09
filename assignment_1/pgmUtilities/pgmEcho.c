@@ -5,6 +5,7 @@
 #include "imageStructures.h"
 #include "readFile.h"
 #include "outputFile.h"
+#include "pgmEcho.h"
 
 //Main method for reading in cmd line arguments
 //
