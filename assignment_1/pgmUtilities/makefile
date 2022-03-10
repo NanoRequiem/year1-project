@@ -24,3 +24,4 @@ all:
 #Second target to clean
 clean:
 				rm pgmEcho pgmComp
+				rm temp*.pgm
