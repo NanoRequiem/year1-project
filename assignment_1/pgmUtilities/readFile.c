@@ -53,7 +53,6 @@ int readImageHead(Image *inputImage, FILE *data)
 	//Saves magicNumber from file
 	inputImage->magicNumber[0] = getc(data);
 	inputImage->magicNumber[1] = getc(data);
-	
 	//Checks if magic numebr is correct
 	if (*magic_Number != MAGIC_NUMBER_ASCII_PGM)
 	{
@@ -99,6 +98,16 @@ int readImageHead(Image *inputImage, FILE *data)
 											&(inputImage->width),
 											&(inputImage->height),
 											&(inputImage->maxGray));
+
+	//Validation check for the scan count to ensure everything has been read
+	if(scanCount != 3)
+	{
+		printf("ERROR: Bad header data");
+
+		freeData(inputImage);
+
+		return 12;
+	}
 
 	//Validation checks for the width and heightvalues
 	if(inputImage->width < 1 || inputImage->width > 65536 ||
@@ -146,11 +155,21 @@ int readImageData(Image *inputImage, FILE *data)
 			//Captures data from file for the imageData 2d array
 			int scanCount = fscanf(data, " %u",&(inputImage->imageData[y][x]));
 
+			//Validate that correct amount of data was read in
+			if(scanCount != 1)
+			{
+				printf("ERROR: Bad Data formatting");
+
+				freeData(inputImage);
+
+				return 13;
+			}
+
 			//Validation check on the captured data
 			if(inputImage->imageData[y][x] < 0 ||
 					inputImage->imageData[y][x] > 255)
 			{
-				printf("ERROR: Bad Data ");
+				printf("ERROR: Bad Data");
 
 				freeData(inputImage);
 

@@ -114,7 +114,6 @@ int Comp(Image *firstImage, Image *secondImage)
   //different
   if(firstImage->magic_Number != secondImage->magic_Number)
   {
-    printf("magic number\nfirstImage = %s\nsecondImage = %s\n -----\n", firstImage->magicNumber, secondImage->magicNumber);
     //Returns 1 signifying the files are logically different
     return 1;
   }
@@ -123,7 +122,6 @@ int Comp(Image *firstImage, Image *secondImage)
   //different
   else if(firstImage->commentLine != secondImage->commentLine)
   {
-    printf("commentLine\nfirstImage = %s\n secondImage = %s\n -----\n", firstImage->commentLine, secondImage->commentLine);
     //Returns 1 signifying the files are logically different
     return 1;
   }
@@ -133,7 +131,6 @@ int Comp(Image *firstImage, Image *secondImage)
   else if(firstImage->width != secondImage->width ||
           firstImage->height != secondImage->height)
   {
-    printf("height and width\nfirstImage = w=%dh=%d\n secondImage = w=%dh=%d\n -----\n", firstImage->width, firstImage->height, secondImage->width, secondImage->height);
     //Returns 1 signifying the files are logically different
     return 1;
   }
@@ -142,7 +139,6 @@ int Comp(Image *firstImage, Image *secondImage)
   //different
   else if(firstImage->maxGray != secondImage->maxGray)
   {
-    printf("maxGray\nfirstImage = %s\n secondImage = %s\n -----\n", firstImage->maxGray, secondImage->maxGray);
     //Returns 1 signifying the files are logically different
     return 1;
   }
