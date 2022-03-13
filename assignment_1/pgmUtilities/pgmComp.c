@@ -118,14 +118,6 @@ int Comp(Image *firstImage, Image *secondImage)
     return 1;
   }
 
-  //Compares the comment line of both images and returns false if they're
-  //different
-  else if(firstImage->commentLine != secondImage->commentLine)
-  {
-    //Returns 1 signifying the files are logically different
-    return 1;
-  }
-
   //Compares height and width of both images and returns false if they're
   //different
   else if(firstImage->width != secondImage->width ||

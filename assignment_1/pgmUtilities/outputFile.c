@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "imageStructures.h"
+#include "outputFile.h"
 
 
 int outputImage(Image *inputImage, char *outFile)
