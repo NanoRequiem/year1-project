@@ -17,6 +17,9 @@ int main(int argc, char **argv)
 		return 1;
   }
 
+  //Create the image structure
+	Image *inputImage = (Image *)malloc( sizeof(Image) );
+
   //Open inputted file
 	FILE *data;
 	data = fopen(argv[1], "r");
