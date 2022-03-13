@@ -49,6 +49,5 @@ int main(int argc, char **argv)
 		return readStatus;
 	}
 
-  printf("it worked lol\n");
   return 0;
 }
