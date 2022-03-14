@@ -5,6 +5,7 @@
 #include "imageStructures.h"
 #include "pgma2b.h"
 #include "readFile.h"
+#include "outputBinFile.h"
 
 //Main method to read in cmd line arguments and call
 //modules to read in files
@@ -47,6 +48,18 @@ int main(int argc, char **argv)
 		fclose(data);
 
 		return readStatus;
+	}
+
+
+	//Close the opened file since we don't need it anymore
+	fclose(data);
+
+	//Call the module to output binary files
+	int outStatus = outputBinary(inputImage, argv[2]);
+
+	if(outStatus != 0) {
+		printf("ERROR: Output failed");
+		return 14;
 	}
 
   return 0;
