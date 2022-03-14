@@ -137,12 +137,12 @@ int readImageHead(Image *inputImage, FILE *data)
 int readImageData(Image *inputImage, FILE *data)
 {
 	//Initializing the rows of the 2D array to store the image data
-	inputImage->imageData = (int**)malloc(inputImage->height * sizeof(int*));
+	inputImage->imageData = (unsigned int**)malloc(inputImage->height * sizeof(int*));
 
 	//For loop to initialize the columns of the array
 	for(int x = 0; x < inputImage->height; x++)
 	{
-		inputImage->imageData[x] = (int*)malloc(inputImage->width * sizeof(int));
+		inputImage->imageData[x] = (unsigned int*)malloc(inputImage->width * sizeof(int));
 	}
 
 	//For loop that goes through all of the image's data and saves it
