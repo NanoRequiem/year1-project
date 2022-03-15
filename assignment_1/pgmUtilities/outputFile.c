@@ -50,8 +50,29 @@ int outputImage(Image *inputImage, char *outFile)
     return 9;
   }
 
-  //Resetting written data to track imageData outputs
-  writtenData = 0;
+  unsigned short *magic_Number = (unsigned short *) inputImage->magicNumber;
+
+  //Checking if the image is an ASCII file
+  if(*magic_Number == 0x3250)
+  {
+    //Calling the function to output ascii data
+    writeASCIIData(inputImage, outputFile);
+  }
+  else if(*magic_Number == 0x3550)
+  {
+    //Calling function to output raw data
+    writeRAWData(inputImage, outputFile);
+  }
+
+  //Closing the output file as we do not need it anymore
+  fclose(outputFile);
+
+  return 0;
+}
+
+int writeASCIIData(Image *inputImage, FILE *outputFile)
+{
+  int writtenData = 0;
 
   //Writing the image data to the output file
   for(int x = 0; x < inputImage->height; x++)
@@ -88,8 +109,27 @@ int outputImage(Image *inputImage, char *outFile)
     writtenData = writtenData + fprintf(outputFile, "\n");
   }
 
-  //Closing the output file as we do not need it anymore
-  fclose(outputFile);
-
+  //success so return 0
   return 0;
+}
+
+int writeRAWData(Image *inputImage, FILE *outputFile)
+{
+  //Creating a new 1D list to store data to be outputted
+    int *outputData = (int *)malloc(inputImage->width * inputImage->height *sizeof(int *));
+    int outputDataCount = 0; //int value to count through output data and capture data
+
+    //Loop through list and output data to the file
+    for(int y=0; y<inputImage->height; y++) {
+        for(int x=0; x<inputImage->width; x++) {
+            printf("%d\n", inputImage->imageData[y][x]);
+            outputData[outputDataCount] = inputImage->imageData[y][x];
+        }
+    }
+
+    //Outputs data to the file
+    fwrite(&outputData, sizeof(outputData), 4, outputFile);
+
+    //Successful write so return 0
+    return 0;
 }

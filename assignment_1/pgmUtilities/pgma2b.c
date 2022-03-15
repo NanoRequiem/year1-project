@@ -5,7 +5,7 @@
 #include "imageStructures.h"
 #include "pgma2b.h"
 #include "readFile.h"
-#include "outputBinFile.h"
+#include "outputFile.h"
 
 //Main method to read in cmd line arguments and call
 //modules to read in files
@@ -54,13 +54,18 @@ int main(int argc, char **argv)
 	//Close the opened file since we don't need it anymore
 	fclose(data);
 
+	inputImage->magicNumber[0] = 'P';
+	inputImage->magicNumber[1] = '5';
+
 	//Call the module to output binary files
-	int outStatus = outputBinary(inputImage, argv[2]);
+	int outStatus = outputImage(inputImage, argv[2]);
 
 	if(outStatus != 0) {
 		printf("ERROR: Output failed");
 		return 14;
 	}
 
+	//Success message
+	printf("CONVERTED");
   return 0;
 }

@@ -2,7 +2,7 @@
 
 typedef struct
 {
-  unsigned char magicNumber[2];
+  char magicNumber[2];
   unsigned short *magic_Number;
   char *commentLine;
   unsigned int width, height;

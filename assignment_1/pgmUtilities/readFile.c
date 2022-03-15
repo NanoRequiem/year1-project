@@ -5,7 +5,7 @@
 #include "imageStructures.h"
 #include "readFile.h"
 
-#define MAGIC_NUMBER_ASCII_PGM 0x3250
+#define MAGIC_NUMBER_ASCII_PGM 
 
 //Method to check the cmd line inputs
 //
@@ -54,7 +54,7 @@ int readImageHead(Image *inputImage, FILE *data)
 	inputImage->magicNumber[0] = getc(data);
 	inputImage->magicNumber[1] = getc(data);
 	//Checks if magic numebr is correct
-	if (*magic_Number != MAGIC_NUMBER_ASCII_PGM)
+	if (*magic_Number != 0x3250 && *magic_Number != 0x3550)
 	{
 		printf("ERROR: Bad Magic Number");
 
