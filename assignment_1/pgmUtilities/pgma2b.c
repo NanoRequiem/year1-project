@@ -66,6 +66,6 @@ int main(int argc, char **argv)
 	}
 
 	//Success message
-	printf("CONVERTED");
+	printf("CONVERTED\n");
   return 0;
 }

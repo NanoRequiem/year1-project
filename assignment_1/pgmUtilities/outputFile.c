@@ -78,7 +78,7 @@ int writeASCIIData(Image *inputImage, FILE *outputFile)
   for(int x = 0; x < inputImage->height; x++)
   {
     //writing data from the imageData array to the file
-    writtenData = fprintf(outputFile, "%d", inputImage->imageData[x][0]);
+    writtenData = fprintf(outputFile, "%u", inputImage->imageData[x][0]);
 
     //Check how many digits each number is to add the correct amount of spaces after each number
     if(inputImage->imageData[x][0] < 10)
@@ -103,7 +103,7 @@ int writeASCIIData(Image *inputImage, FILE *outputFile)
         writtenData = fprintf(outputFile, " ");
       }
 
-      writtenData = fprintf(outputFile, "%d", inputImage->imageData[x][y]);
+      writtenData = fprintf(outputFile, "%u", inputImage->imageData[x][y]);
     }
     //End of current line so print a new line to file
     writtenData = writtenData + fprintf(outputFile, "\n");
@@ -115,21 +115,19 @@ int writeASCIIData(Image *inputImage, FILE *outputFile)
 
 int writeRAWData(Image *inputImage, FILE *outputFile)
 {
-  //Creating a new 1D list to store data to be outputted
-    int *outputData = (int *)malloc(inputImage->width * inputImage->height *sizeof(int *));
-    int outputDataCount = 0; //int value to count through output data and capture data
+  //List to save character versions of the saves int data
+  unsigned char *characterData = (unsigned char *)malloc(inputImage->height * inputImage->width * sizeof(unsigned char *));
 
-    //Loop through list and output data to the file
-    for(int y=0; y<inputImage->height; y++) {
-        for(int x=0; x<inputImage->width; x++) {
-            printf("%d\n", inputImage->imageData[y][x]);
-            outputData[outputDataCount] = inputImage->imageData[y][x];
-        }
-    }
+  //Outputs data to the file
+  for(int x = 0; x < inputImage->height * inputImage->width; x++)
+  {
+    //Writes all data into a character list
+    characterData[x] = (unsigned char) inputImage->rawImageData[x];
+  }
 
-    //Outputs data to the file
-    fwrite(&outputData, sizeof(outputData), 4, outputFile);
+  //Outputs raw character data to file
+  fwrite(&characterData, sizeof(unsigned char), inputImage->height * inputImage->width, outputFile);
 
-    //Successful write so return 0
-    return 0;
+  //Successful write so return 0
+  return 0;
 }

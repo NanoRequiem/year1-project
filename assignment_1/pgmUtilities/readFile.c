@@ -127,22 +127,37 @@ int readImageHead(Image *inputImage, FILE *data)
 		return 6;
 	}
 
-	int imageDataStatus = readImageData(inputImage, data);
+	//Initialise imageDataStatus to keep track of whether reading in data was successful
+	int imageDataStatus = -1;
+
+	//If file is ascii call the readASCIIData function
+	if(*magic_Number == 0x3250)
+	{
+		imageDataStatus = readASCIIData(inputImage, data);
+	}
+
+	//If file is a binary file call the readASCIIData function
+	else if(*magic_Number == 0x3550)
+	{
+		imageDataStatus = ReadRAWData(inputImage, data);
+		printf("\nlmao\n");
+	}
+
 	return imageDataStatus;
 }
 
 //Method to read in the specific values of each point of the image
 //inputImage - The struct where we are going to save the file's data
 //data - The file that the data is being read from
-int readImageData(Image *inputImage, FILE *data)
+int readASCIIData(Image *inputImage, FILE *data)
 {
 	//Initializing the rows of the 2D array to store the image data
-	inputImage->imageData = (unsigned int**)malloc(inputImage->height * sizeof(int*));
+	inputImage->imageData = (int**)malloc(inputImage->height * sizeof(int*));
 
 	//For loop to initialize the columns of the array
 	for(int x = 0; x < inputImage->height; x++)
 	{
-		inputImage->imageData[x] = (unsigned int*)malloc(inputImage->width * sizeof(int));
+		inputImage->imageData[x] = (int*)malloc(inputImage->width * sizeof(int));
 	}
 
 	//For loop that goes through all of the image's data and saves it
@@ -177,6 +192,57 @@ int readImageData(Image *inputImage, FILE *data)
 			}
 		}
 	}
+
+	//Converts and stores current stored data as raw binary data
+	int rawStatus = saveRAWData(inputImage);
+
+	if(rawStatus != 0)
+	{
+		printf("ERROR: Bad Raw Data");
+
+		freeData(inputImage);
+
+		return 15;
+	}
+
+	return 0;
+}
+
+int saveRAWData(Image *InputImage)
+{
+	//initialize rawImageData
+	long nImageBytes = InputImage->width * InputImage->height * sizeof(int);
+	InputImage->rawImageData = (int *) malloc(nImageBytes);
+
+	//count value for rawImageData
+	int rawImageCount = 0;
+
+	for(int y = 0; y < InputImage->height; y++)
+	{
+		for(int x = 0; x <InputImage->width; x++)
+		{
+			InputImage->rawImageData[rawImageCount] = (int) InputImage->imageData[y][x];
+			rawImageCount++;
+		}
+	}
+
+	return 0;
+}
+
+int ReadRAWData(Image *inputImage, FILE *data)
+{
+	//See the size of the data
+	int sizeOfData = inputImage->width * inputImage->height;
+
+	//Creating a new 1D list to store data to be taken in
+    char inputData[sizeOfData];
+	
+
+	//Read in data
+	fread(&inputData, sizeof(char), sizeOfData, data);
+
+	printf("lol = %c\n", inputData[0]);
+	
 
 	return 0;
 }

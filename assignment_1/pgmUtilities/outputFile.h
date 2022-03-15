@@ -3,3 +3,9 @@
 //image data structure.
 
 int outputImage(Image *inputImage, char *outFile);
+
+//Outputs the data of an ascii file
+int writeASCIIData(Image *inputImage, FILE *outFile);
+
+//Outputs the data of a binary file
+int writeRAWData(Image *inputImage, FILE *outputFile);
