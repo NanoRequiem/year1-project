@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "imageStructures.h"
+#include "pgmReduce.h"
 #include "freeData.h"
 #include "readFile.h"
 #include "outputFile.h"
@@ -60,8 +61,12 @@ int main(int argc, char **argv)
     //Initializes the reduced image struct
     Image *reduce = (Image *)malloc( sizeof(Image));
 
+    //Convert argv[2] into and integer to be used
+    int factor;
+    sscanf(argv[2], "%d", &factor);
+
     //Calls function to initialise the reduce image Struct's data
-    initReduced(inputImage, reduce, argv[2]);
+    initReduced(inputImage, reduce, factor);
 }
 
 //initReduced method for initializing the reduced file
@@ -77,12 +82,9 @@ int initReduced(Image *inputImage, Image *reduce, int factor)
 	//Initializes data header variables as default variables
 	reduce->maxGray = inputImage->maxGray;
 
-    //Variables to count the new widths and heights
-    int countWidth, countHeight;
-
-    //Call countNewHeightAndWidth to find new height and width
-    reduce->width = countNewHeightAndWidth(int countWidth, int inputImage->width);
-    reduce->height = countNewHeightAndWidth(int countHeight, int inputImage->height);
+    //Get the new width and heights for the reduced image
+    reduce->width = inputImage->width/factor + 1;
+    reduce->height = inputImage->height/factor + 1;
 
     printf("%d\n", reduce->width);
     printf("%d\n", reduce->height);
@@ -90,24 +92,8 @@ int initReduced(Image *inputImage, Image *reduce, int factor)
 	return 0;
 }
 
-//Function for counting new height and width to reduce to
-int countNewHeightAndWidth(int count, int previous)
-{
-    //Loops through width to find out new width by seeing how many times mod can be done
-    for(int x = 1; x < previous; x++)
-    {
-        //Check if modulous can be done and if it can iterates count value
-        if(x % factor)
-        {
-            count++;
-        }
-    }
-
-    return count + 1;
-}
-
 //reduce method to actually reduce the image
 int reduce(Image *inputImage, Image *reduced, int factor)
 {
-
+    return 0;
 }

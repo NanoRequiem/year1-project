@@ -4,13 +4,13 @@
 //
 //argc = number of command line arguments
 //**argv = list of all command line arguments
-int main(int argc, char **argv)
+int main(int argc, char **argv);
 
 //initReduced method for initializing the reduced file
 //
 //inputImage = image inputted
 //reduced = Reduced image
-int initReduced(Image *inputImage, Image *reduce);
+int initReduced(Image *inputImage, Image *reduce, int factor);
 
 //reduce method to actually reduce the image
 //
