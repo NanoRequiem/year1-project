@@ -17,4 +17,4 @@ int initReduced(Image *inputImage, Image *reduce, int factor);
 //inputImage = image inputted
 //reduced = Reduced image
 //factor = The factor that input image is reduced by
-int reduce(Image *inputImage, Image *reduced, int factor);
+int reduceImage(Image *inputImage, Image *reduced, int factor);

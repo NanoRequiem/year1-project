@@ -24,7 +24,7 @@ int validateCmdArguments(int requiredArguments, int argc)
 }
 
 //Method to initialize the image data
-int initImage(Image *inputImage, FILE *data)
+int initImage(Image *inputImage)
 {
 	//Initializes magic number with a 0 character meaning NULL
 	inputImage->magicNumber[0] = '0';
@@ -245,12 +245,23 @@ int ReadRAWData(Image *inputImage, FILE *data)
 		{
 			printf("ERROR: Bad Data formatting");
 
-				freeImage(inputImage);
+			freeImage(inputImage);
 
-				return 13;
+			return 13;
 		}
 	}
 	
+	//Call function to convert rawData into ImageData
+	if(rawDataToImageData(inputImage) != 0)
+	{
+		return 8;
+	}
+
+	return 0;
+}
+
+int rawDataToImageData(Image *inputImage)
+{
 	//Initializing the rows of the 2D array to store the image data
 	inputImage->imageData = (int**)malloc(inputImage->height * sizeof(int*));
 
@@ -285,7 +296,6 @@ int ReadRAWData(Image *inputImage, FILE *data)
 			rawDataCount++;
 		}
 	}
-
 
 	return 0;
 }

@@ -29,16 +29,18 @@ int outputImage(Image *inputImage, char *outFile)
   //present
   if(inputImage->commentLine == NULL)
   {
-    writtenData = fprintf(outputFile, "%s\n\n%d %d\n%d\n",
-                              inputImage->magicNumber,
+    writtenData = fprintf(outputFile, "%c%c\n\n%d %d\n%d\n",
+                              inputImage->magicNumber[0],
+                              inputImage->magicNumber[1],
                               inputImage->width,
                               inputImage->height,
                               inputImage->maxGray);
   }
   else
   {
-    writtenData = fprintf(outputFile, "%s\n%s\n\n%d %d\n%d",
-                              inputImage->magicNumber,
+    writtenData = fprintf(outputFile, "%c%c\n%s\n\n%d %d\n%d",
+                              inputImage->magicNumber[0],
+                              inputImage->magicNumber[1],
                               inputImage->commentLine,
                               inputImage->width,
                               inputImage->height,

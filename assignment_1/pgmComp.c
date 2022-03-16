@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 	}
 
   //read in data for the first image
-  initImage(firstImage, firstData);
+  initImage(firstImage);
 	int readStatus = readImageHead(firstImage, firstData);
 
   //if the data read in was not successful output file name and error code;
@@ -72,7 +72,7 @@ int main(int argc, char **argv)
 	}
 
   //Read in data for the second image
-  initImage(secondImage, secondData);
+  initImage(secondImage);
 	readStatus = readImageHead(secondImage, secondData);
 
   //if the data read in was not successful output file name and error code;
