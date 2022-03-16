@@ -93,9 +93,6 @@ int initReduced(Image *inputImage, Image *reduce, int factor)
 	reduce->magicNumber[0] = inputImage->magicNumber[0];
 	reduce->magicNumber[1] = inputImage->magicNumber[1];
 
-    printf("magic number = %s\n", inputImage->magicNumber);
-    printf("magic number reduce = %s\n", reduce->magicNumber);
-
 	//Initializes commentLine as NULL
 	reduce->commentLine = inputImage->commentLine;
 
