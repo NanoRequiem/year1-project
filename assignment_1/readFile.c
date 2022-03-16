@@ -3,9 +3,8 @@
 #include <string.h>
 
 #include "imageStructures.h"
+#include "freeData.h"
 #include "readFile.h"
-
-#define MAGIC_NUMBER_ASCII_PGM 
 
 //Method to check the cmd line inputs
 //
@@ -58,7 +57,7 @@ int readImageHead(Image *inputImage, FILE *data)
 	{
 		printf("ERROR: Bad Magic Number");
 
-		freeData(inputImage);
+		freeImage(inputImage);
 
 		return 1;
 	}
@@ -83,7 +82,7 @@ int readImageHead(Image *inputImage, FILE *data)
 		{
 			printf("ERROR: Bad Comment Line");
 
-			freeData(inputImage);
+			freeImage(inputImage);
 
 			return 4;
 		}
@@ -104,7 +103,7 @@ int readImageHead(Image *inputImage, FILE *data)
 	{
 		printf("ERROR: Bad header data");
 
-		freeData(inputImage);
+		freeImage(inputImage);
 
 		return 12;
 	}
@@ -115,7 +114,7 @@ int readImageHead(Image *inputImage, FILE *data)
 	{
 		printf("ERROR: Bad Dimensions");
 
-		freeData(inputImage);
+		freeImage(inputImage);
 
 		return 5;
 	}
@@ -140,7 +139,6 @@ int readImageHead(Image *inputImage, FILE *data)
 	else if(*magic_Number == 0x3550)
 	{
 		imageDataStatus = ReadRAWData(inputImage, data);
-		printf("\nlmao\n");
 	}
 
 	return imageDataStatus;
@@ -175,7 +173,7 @@ int readASCIIData(Image *inputImage, FILE *data)
 			{
 				printf("ERROR: Bad Data formatting");
 
-				freeData(inputImage);
+				freeImage(inputImage);
 
 				return 13;
 			}
@@ -186,7 +184,7 @@ int readASCIIData(Image *inputImage, FILE *data)
 			{
 				printf("ERROR: Bad Data");
 
-				freeData(inputImage);
+				freeImage(inputImage);
 
 				return 8;
 			}
@@ -200,7 +198,7 @@ int readASCIIData(Image *inputImage, FILE *data)
 	{
 		printf("ERROR: Bad Raw Data");
 
-		freeData(inputImage);
+		freeImage(inputImage);
 
 		return 15;
 	}
@@ -231,52 +229,64 @@ int saveRAWData(Image *InputImage)
 
 int ReadRAWData(Image *inputImage, FILE *data)
 {
-	//See the size of the data
-	int sizeOfData = inputImage->width * inputImage->height;
+	//Skips blank space line so that the data can be read
+	fscanf(data, " ");
 
-	//Creating a new 1D list to store data to be taken in
-    char inputData[sizeOfData];
-	
+	//initialize rawImageData
+	long nImageBytes = inputImage->width * inputImage->height * sizeof(int);
+	inputImage->rawImageData = (int *) malloc(nImageBytes);
 
-	//Read in data
-	fread(&inputData, sizeof(char), sizeOfData, data);
+	//Loops through list and takes in char value for each position in the list
+	for(int x = 0; x < inputImage->height * inputImage->width; x++)
+	{	
+		//reads in data from the binary file
+		int scanCount = fread(&(inputImage->rawImageData[x]), 1, 1, data);
 
-	printf("lol = %c\n", inputData[0]);
-	
-
-	return 0;
-}
-
-//Module to free data should any part fail
-int freeData(Image *inputImage)
-{
-	//Checks if each piece of data within the struct is allocated
-	//if it is allocated the data is freed
-	//First checks magicNumber
-	if(inputImage->magicNumber != NULL)
-	{
-		free(inputImage->magicNumber);
-	}
-	//Checks magic_Number
-	if(inputImage->magic_Number != NULL)
-	{
-		free(inputImage->magic_Number);
-	}
-	//Checks commentLine
-	if(inputImage->commentLine != NULL)
-	{
-		free(inputImage->commentLine);
-	}
-	//Checks for image data then uses a for loop to free data backwards
-	if(inputImage->imageData != NULL)
-	{
-		for(int x = inputImage->height; x >= 0; x--)
+		if(scanCount != 1)
 		{
-			free(inputImage->imageData[x]);
+			printf("ERROR: Bad Data formatting");
+
+				freeImage(inputImage);
+
+				return 13;
 		}
-		free(inputImage->imageData);
+	}
+	
+	//Initializing the rows of the 2D array to store the image data
+	inputImage->imageData = (int**)malloc(inputImage->height * sizeof(int*));
+
+	//For loop to initialize the columns of the array
+	for(int x = 0; x < inputImage->height; x++)
+	{
+		inputImage->imageData[x] = (int*)malloc(inputImage->width * sizeof(int));
 	}
 
-	return 0;
+	int rawDataCount = 0; //Variable for counting through the raw data list
 
+	//For loop to put the captured raw data into imageData so that it can be used in asci routines
+	for(int y = 0; y < inputImage->height; y++)
+	{
+		for(int b = 0; b < inputImage->width; b++)
+		{	
+			//Puts the raw image data into the appropriate place in the 2d array
+			inputImage->imageData[y][b] = inputImage->rawImageData[rawDataCount];
+			
+			//Check that the current input is correct
+			if(inputImage->imageData[y][b] < 0 ||
+					inputImage->imageData[y][b] > 255)
+			{
+				printf("ERROR: Bad Data");
+
+				freeImage(inputImage);
+
+				return 8;
+			}
+
+			//Iterate rawDataCount
+			rawDataCount++;
+		}
+	}
+
+
+	return 0;
 }

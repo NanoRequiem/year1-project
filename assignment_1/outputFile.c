@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "imageStructures.h"
+#include "freeData.h"
 #include "outputFile.h"
 
 
@@ -18,6 +19,7 @@ int outputImage(Image *inputImage, char *outFile)
   if(outputFile == NULL)
   {
     printf("ERROR: Output File Path Not Found");
+    freeImage(inputImage);
     return 11;
   }
 
