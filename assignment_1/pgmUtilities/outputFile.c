@@ -115,18 +115,18 @@ int writeASCIIData(Image *inputImage, FILE *outputFile)
 
 int writeRAWData(Image *inputImage, FILE *outputFile)
 {
-  //List to save character versions of the saves int data
-  unsigned char *characterData = (unsigned char *)malloc(inputImage->height * inputImage->width * sizeof(unsigned char *));
-
-  //Outputs data to the file
+  //loops through 
   for(int x = 0; x < inputImage->height * inputImage->width; x++)
   {
-    //Writes all data into a character list
-    characterData[x] = (unsigned char) inputImage->rawImageData[x];
+    //Converts the saved data into a character
+    char data = inputImage->rawImageData[x];
+    //Outputs raw character data to file and checks it has been written
+    if(fwrite(&data, 1, 1, outputFile) != 1)
+    {
+      printf("ERROR: Binary write failed");
+      return 16;
+    }
   }
-
-  //Outputs raw character data to file
-  fwrite(&characterData, sizeof(unsigned char), inputImage->height * inputImage->width, outputFile);
 
   //Successful write so return 0
   return 0;
