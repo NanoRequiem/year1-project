@@ -167,7 +167,6 @@ int readASCIIData(Image *inputImage, FILE *data)
 		{
 			//Captures data from file for the imageData 2d array
 			int scanCount = fscanf(data, " %u",&(inputImage->imageData[y][x]));
-
 			//Validate that correct amount of data was read in
 			if(scanCount != 1)
 			{
