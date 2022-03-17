@@ -11,6 +11,7 @@
 #define FAIL_BAD_ARGS 1
 #define FAIL_BAD_FNAME 2
 #define FAIL_BAD_OUTPUT 9
+#define FAIL_MISC 100
 
 //Main method to read in cmd line arguments and call
 //modules to read in files
@@ -64,9 +65,16 @@ int main(int argc, char **argv)
 		return readStatus;
 	}
 
-
 	//Close the opened file since we don't need it anymore
 	fclose(data);
+
+  //Check that the inputted image is a binary image
+  if(inputImage->magicNumber[1] == '2')
+  {
+    printf("ERROR: Miscellaneous(ASCII File was inputted when binary file required)\n")
+
+    return FAIL_MISC;
+  }
 
   //Changing magic number to be the ASCII magic number
 	inputImage->magicNumber[0] = 'P';
