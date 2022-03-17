@@ -6,6 +6,13 @@
 #include "readFile.h"
 #include "pgmComp.h"
 
+#define SUCCESS_NO_ERRORS 0
+#define FAIL_BAD_ARGS 1
+#define FAIL_BAD_FNAME 2
+#define FAIL_BAD_OUTPUT 9
+
+#define DIFFERENT_VALUE 1
+
 //Main method for reading in cmd line arguments and Calling
 //readFile methods.
 //
@@ -28,7 +35,7 @@ int main(int argc, char **argv)
   if(validateCmdArguments(3, argc) == 1)
   {
     printf("ERROR: Bad argument count\n");
-		return 1;
+		return FAIL_BAD_ARGS;
   }
 
   //initialize the first image object
@@ -45,7 +52,7 @@ int main(int argc, char **argv)
 	{
 		printf("ERROR: Bad File Name(%s)\n", argv[1]);
 
-		return 2;
+		return FAIL_BAD_FNAME;
 	}
 
   //read in data for the first image
@@ -68,14 +75,14 @@ int main(int argc, char **argv)
 
   //open the second image
   FILE *secondData;
-  secondData = fopen(argv[1], "r");
+  secondData = fopen(argv[2], "r");
 
   //check the second image has been opened
   if(firstData == NULL)
 	{
 		printf("ERROR: Bad File Name(%s)\n", argv[2]);
 
-		return 2;
+		return FAIL_BAD_FNAME;
 	}
 
   //Read in data for the second image
@@ -101,13 +108,13 @@ int main(int argc, char **argv)
   if(compStatus == 0)
   {
     printf("IDENTICAL\n");
-    return 0;
+    return SUCCESS_NO_ERRORS;
   }
 
   else
   {
     printf("DIFFERENT\n");
-    return 0;
+    return SUCCESS_NO_ERRORS;
   }
 }
 
@@ -122,7 +129,7 @@ int Comp(Image *firstImage, Image *secondImage)
   if(firstImage->magic_Number != secondImage->magic_Number)
   {
     //Returns 1 signifying the files are logically different
-    return 1;
+    return DIFFERENT_VALUE;
   }
 
   //Compares height and width of both images and returns false if they're
@@ -131,7 +138,7 @@ int Comp(Image *firstImage, Image *secondImage)
           firstImage->height != secondImage->height)
   {
     //Returns 1 signifying the files are logically different
-    return 1;
+    return DIFFERENT_VALUE;
   }
 
   //Compares max gray of both images and returns false if they're
@@ -139,7 +146,7 @@ int Comp(Image *firstImage, Image *secondImage)
   else if(firstImage->maxGray != secondImage->maxGray)
   {
     //Returns 1 signifying the files are logically different
-    return 1;
+    return DIFFERENT_VALUE;
   }
 
   //Loops through all of the image data and compares each point in the array
@@ -164,7 +171,7 @@ int Comp(Image *firstImage, Image *secondImage)
   if(sameData == 0)
   {
     //Returns 1 signifying the files are logically different
-    return 1;
+    return DIFFERENT_VALUE;
   }
 
   return 0;
