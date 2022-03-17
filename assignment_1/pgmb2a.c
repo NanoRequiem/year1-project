@@ -71,7 +71,7 @@ int main(int argc, char **argv)
   //Check that the inputted image is a binary image
   if(inputImage->magicNumber[1] == '2')
   {
-    printf("ERROR: Miscellaneous(ASCII File was inputted when binary file required)\n")
+    printf("ERROR: Miscellaneous(ASCII File was inputted when binary file required)\n");
 
     return FAIL_MISC;
   }
