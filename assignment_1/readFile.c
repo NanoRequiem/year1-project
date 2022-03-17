@@ -6,6 +6,15 @@
 #include "freeData.h"
 #include "readFile.h"
 
+#define SUCCESS_NO_ERRORS 0
+#define FAIL_BAD_ARGS 1
+#define FAIL_BAD_MAGIC_NUM 3
+#define FAIL_BAD_COMMENT_LINE 4
+#define FAIL_BAD_DIMENSIONS 5
+#define FAIL_BAD_MAX_GRAY 6
+#define FAIL_BAD_DATA 8
+#define FAIL_MISC 100
+
 //Method to check the cmd line inputs
 //
 //requiredArguments - The arguments required for the utility
@@ -15,11 +24,11 @@ int validateCmdArguments(int requiredArguments, int argc)
 {
 	if(requiredArguments != argc)
 	{
-		return 1;
+		return FAIL_BAD_ARGS;
 	}
 	else
 	{
-		return 0;
+		return SUCCESS_NO_ERRORS;
 	}
 }
 
@@ -38,7 +47,7 @@ int initImage(Image *inputImage)
 	inputImage->width = 0;
 	inputImage->maxGray = 255;
 
-	return 0;
+	return SUCCESS_NO_ERRORS;
 }
 
 //Method to initialize and read in the image Header information
@@ -59,7 +68,7 @@ int readImageHead(Image *inputImage, FILE *data)
 
 		freeImage(inputImage);
 
-		return 1;
+		return FAIL_BAD_MAGIC_NUM;
 	}
 
 	//Used to scan for whitespace
@@ -84,7 +93,7 @@ int readImageHead(Image *inputImage, FILE *data)
 
 			freeImage(inputImage);
 
-			return 4;
+			return FAIL_BAD_COMMENT_LINE;
 		}
 	}
 	else
@@ -101,11 +110,11 @@ int readImageHead(Image *inputImage, FILE *data)
 	//Validation check for the scan count to ensure everything has been read
 	if(scanCount != 3)
 	{
-		printf("ERROR: Bad header data");
+		printf("ERROR: Miscellaneous (Bad header data)");
 
 		freeImage(inputImage);
 
-		return 12;
+		return FAIL_MISC;
 	}
 
 	//Validation checks for the width and heightvalues
@@ -116,14 +125,14 @@ int readImageHead(Image *inputImage, FILE *data)
 
 		freeImage(inputImage);
 
-		return 5;
+		return FAIL_BAD_DIMENSIONS;
 	}
 
 	//Validation check for maxGray value
 	if(inputImage->maxGray != 255)
 	{
 		printf("ERROR: Bad Max GrayValue ");
-		return 6;
+		return FAIL_BAD_MAX_GRAY;
 	}
 
 	//Initialise imageDataStatus to keep track of whether reading in data was successful
@@ -170,11 +179,11 @@ int readASCIIData(Image *inputImage, FILE *data)
 			//Validate that correct amount of data was read in
 			if(scanCount != 1)
 			{
-				printf("ERROR: Bad Data formatting");
+				printf("ERROR: Miscellaneous (Bad Data formatting)");
 
 				freeImage(inputImage);
 
-				return 13;
+				return FAIL_MISC;
 			}
 
 			//Validation check on the captured data
@@ -185,7 +194,7 @@ int readASCIIData(Image *inputImage, FILE *data)
 
 				freeImage(inputImage);
 
-				return 8;
+				return FAIL_BAD_DATA;
 			}
 		}
 	}
@@ -195,14 +204,14 @@ int readASCIIData(Image *inputImage, FILE *data)
 
 	if(rawStatus != 0)
 	{
-		printf("ERROR: Bad Raw Data");
+		printf("ERROR: Miscellaneous (Bad Raw Data)");
 
 		freeImage(inputImage);
 
 		return 15;
 	}
 
-	return 0;
+	return SUCCESS_NO_ERRORS;
 }
 
 int saveRAWData(Image *InputImage)
@@ -223,7 +232,7 @@ int saveRAWData(Image *InputImage)
 		}
 	}
 
-	return 0;
+	return SUCCESS_NO_ERRORS;
 }
 
 int ReadRAWData(Image *inputImage, FILE *data)
@@ -237,7 +246,7 @@ int ReadRAWData(Image *inputImage, FILE *data)
 
 	//Loops through list and takes in char value for each position in the list
 	for(int x = 0; x < inputImage->height * inputImage->width; x++)
-	{	
+	{
 		//reads in data from the binary file
 		int scanCount = fread(&(inputImage->rawImageData[x]), 1, 1, data);
 
@@ -247,17 +256,17 @@ int ReadRAWData(Image *inputImage, FILE *data)
 
 			freeImage(inputImage);
 
-			return 13;
+			return FAIL_MISC;
 		}
 	}
-	
+
 	//Call function to convert rawData into ImageData
 	if(rawDataToImageData(inputImage) != 0)
 	{
-		return 8;
+		return FAIL_BAD_DATA;
 	}
 
-	return 0;
+	return SUCCESS_NO_ERRORS;
 }
 
 int rawDataToImageData(Image *inputImage)
@@ -277,10 +286,10 @@ int rawDataToImageData(Image *inputImage)
 	for(int y = 0; y < inputImage->height; y++)
 	{
 		for(int b = 0; b < inputImage->width; b++)
-		{	
+		{
 			//Puts the raw image data into the appropriate place in the 2d array
 			inputImage->imageData[y][b] = inputImage->rawImageData[rawDataCount];
-			
+
 			//Check that the current input is correct
 			if(inputImage->imageData[y][b] < 0 ||
 					inputImage->imageData[y][b] > 255)
@@ -289,7 +298,7 @@ int rawDataToImageData(Image *inputImage)
 
 				freeImage(inputImage);
 
-				return 8;
+				return FAIL_BAD_DATA;
 			}
 
 			//Iterate rawDataCount
@@ -297,5 +306,5 @@ int rawDataToImageData(Image *inputImage)
 		}
 	}
 
-	return 0;
+	return SUCCESS_NO_ERRORS;
 }
