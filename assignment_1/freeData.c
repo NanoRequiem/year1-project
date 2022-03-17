@@ -5,6 +5,8 @@
 #include "imageStructures.h"
 #include "freeData.h"
 
+#define SUCCESS 0
+
 //Module to free data should any part fail
 int freeImage(Image *inputImage)
 {
@@ -35,6 +37,5 @@ int freeImage(Image *inputImage)
 		free(inputImage->imageData);
 	}
 
-	return 0;
-
+	return SUCCESS;
 }
