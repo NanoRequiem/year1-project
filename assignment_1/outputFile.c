@@ -6,6 +6,9 @@
 #include "freeData.h"
 #include "outputFile.h"
 
+#define SUCCESS_NO_ERRORS 0
+#define FAIL_BAD_FNAME 2
+#define FAIL_BAD_OUTPUT 9
 
 int outputImage(Image *inputImage, char *outFile)
 {
@@ -18,9 +21,9 @@ int outputImage(Image *inputImage, char *outFile)
   //Validation check on opening file
   if(outputFile == NULL)
   {
-    printf("ERROR: Output File Path Not Found");
+    printf("ERROR: Bad File Name (%s)\n", outFile);
     freeImage(inputImage);
-    return 11;
+    return FAIL_BAD_FNAME;
   }
 
   //Writing magic number, comment line, max gray, height and width values
@@ -51,7 +54,7 @@ int outputImage(Image *inputImage, char *outFile)
   if(writtenData < 0)
   {
     printf("ERROR: Output Failed");
-    return 9;
+    return FAIL_BAD_OUTPUT;
   }
 
   unsigned short *magic_Number = (unsigned short *) inputImage->magicNumber;
@@ -71,7 +74,7 @@ int outputImage(Image *inputImage, char *outFile)
   //Closing the output file as we do not need it anymore
   fclose(outputFile);
 
-  return 0;
+  return SUCCESS_NO_ERRORS;
 }
 
 int writeASCIIData(Image *inputImage, FILE *outputFile)
@@ -114,12 +117,12 @@ int writeASCIIData(Image *inputImage, FILE *outputFile)
   }
 
   //success so return 0
-  return 0;
+  return SUCCESS_NO_ERRORS;
 }
 
 int writeRAWData(Image *inputImage, FILE *outputFile)
 {
-  //loops through 
+  //loops through
   for(int x = 0; x < inputImage->height * inputImage->width; x++)
   {
     //Converts the saved data into a character
@@ -127,11 +130,11 @@ int writeRAWData(Image *inputImage, FILE *outputFile)
     //Outputs raw character data to file and checks it has been written
     if(fwrite(&data, 1, 1, outputFile) != 1)
     {
-      printf("ERROR: Binary write failed");
-      return 16;
+      printf("ERROR: Output Failed\n");
+      return FAIL_BAD_OUTPUT;
     }
   }
 
   //Successful write so return 0
-  return 0;
+  return SUCCESS_NO_ERRORS;
 }
