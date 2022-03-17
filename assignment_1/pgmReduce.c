@@ -8,6 +8,11 @@
 #include "readFile.h"
 #include "outputFile.h"
 
+#define SUCCESS_NO_ERRORS 0
+#define FAIL_BAD_ARGS 1
+#define FAIL_BAD_FNAME 2
+#define FAIL_BAD_OUTPUT 9
+
 //Main method for reading in cmd line arguments
 //
 //argc = number of command line arguments
@@ -42,7 +47,7 @@ int main(int argc, char **argv)
 	{
 		printf("ERROR: Bad File Name(%s)\n", argv[1]);
 
-		return 2;
+		return FAIL_BAD_FNAME;
 	}
 
 	//Calling the InitImage method to initialize the struct
@@ -65,21 +70,21 @@ int main(int argc, char **argv)
 	//Close the file since we have read everything we need from it
 	fclose(data);
 
-    //Initializes the reduced image struct
-    Image *reduce = (Image *)malloc( sizeof(Image));
+  //Initializes the reduced image struct
+  Image *reduce = (Image *)malloc( sizeof(Image));
 
-    //Convert argv[2] into and integer to be used
-    int factor;
-    sscanf(argv[2], "%d", &factor);
+  //Convert argv[2] into and integer to be used
+  int factor;
+  sscanf(argv[2], "%d", &factor);
 
-    //Calls function to initialise the reduce image Struct's data
-    initImage(reduce);
-    initReduced(inputImage, reduce, factor);
+  //Calls function to initialise the reduce image Struct's data
+  initImage(reduce);
+  initReduced(inputImage, reduce, factor);
 
-    //Calls function to reduce the data held within the image struct
-    reduceImage(inputImage, reduce, factor);
+  //Calls function to reduce the data held within the image struct
+  reduceImage(inputImage, reduce, factor);
 
-    //Calling module to output reduced data to a file
+  //Calling module to output reduced data to a file
 	int outStatus = outputImage(reduce, argv[3]);
 
 	//output message if the program fails to output a file
@@ -90,13 +95,13 @@ int main(int argc, char **argv)
 	}
 
     printf("REDUCED\n");
-    return 0;
+    return SUCCESS_NO_ERRORS;
 }
 
 //initReduced method for initializing the reduced file
 int initReduced(Image *inputImage, Image *reduce, int factor)
 {
-    //Initializes magic number with a 0 character meaning NULL
+  //Initializes magic number with a 0 character meaning NULL
 	reduce->magicNumber[0] = inputImage->magicNumber[0];
 	reduce->magicNumber[1] = inputImage->magicNumber[1];
 
@@ -106,66 +111,66 @@ int initReduced(Image *inputImage, Image *reduce, int factor)
 	//Initializes data header variables as default variables
 	reduce->maxGray = inputImage->maxGray;
 
-    //Get the new width and heights for the reduced image
-    reduce->width = inputImage->width/factor + 1;
-    reduce->height = inputImage->height/factor + 1;
+  //Get the new width and heights for the reduced image
+  reduce->width = inputImage->width/factor + 1;
+  reduce->height = inputImage->height/factor + 1;
 
-	return 0;
+	return SUCCESS_NO_ERRORS;
 }
 
 //reduce method to actually reduce the image
 int reduceImage(Image *inputImage, Image *reduced, int factor)
 {
-    //Variable to count for the reduced image
-    int reducedCount = 0;
+  //Variable to count for the reduced image
+  int reducedCount = 0;
 
-    //initialize rawImageData for reduced
+  //initialize rawImageData for reduced
 	long nImageBytes = reduced->width * reduced->height * sizeof(int);
 	reduced->rawImageData = (int *) malloc(nImageBytes);
 
-    //Loop through input image and output when the x and y values mod to 0 with factor
-    for(int y = 0; y < inputImage->height; y++)
-    {
+  //Loop through input image and output when the x and y values mod to 0 with factor
+  for(int y = 0; y < inputImage->height; y++)
+  {
 
-        for(int x = 0; x < inputImage->width; x++)
-        {
-            //Check if x = 0 and y = 0
-            if(x == 0 && y == 0)
-            {
-                //Correct spot so save this data
-                reduced->rawImageData[reducedCount] = inputImage->imageData[y][x];
-                //Iterate our reduced counter
-                reducedCount++;
-            }
-            //Check if x = 0 and y mod factor = 0
-            else if(x == 0 && y % factor == 0)
-            {
-                //Correct spot so save this data
-                reduced->rawImageData[reducedCount] = inputImage->imageData[y][x];
-                //Iterate our reduced counter
-                reducedCount++;
-            }
-            //Check if x mod factor = 0 and y = 0
-            else if(x % factor == 0 && y == 0)
-            {
-                //Correct spot so save this data
-                reduced->rawImageData[reducedCount] = inputImage->imageData[y][x];
-                //Iterate our reduced counter
-                reducedCount++;
-            }
-            //Check if x mod factor = 0 and y mod factor = 0
-            else if(x % factor == 0 && y % factor == 0)
-            {
-                //Correct spot so save this data
-                reduced->rawImageData[reducedCount] = inputImage->imageData[y][x];
-                //Iterate our reduced counter
-                reducedCount++;
-            }
+      for(int x = 0; x < inputImage->width; x++)
+      {
+          //Check if x = 0 and y = 0
+          if(x == 0 && y == 0)
+          {
+              //Correct spot so save this data
+              reduced->rawImageData[reducedCount] = inputImage->imageData[y][x];
+              //Iterate our reduced counter
+              reducedCount++;
+          }
+          //Check if x = 0 and y mod factor = 0
+          else if(x == 0 && y % factor == 0)
+          {
+              //Correct spot so save this data
+              reduced->rawImageData[reducedCount] = inputImage->imageData[y][x];
+              //Iterate our reduced counter
+              reducedCount++;
+          }
+          //Check if x mod factor = 0 and y = 0
+          else if(x % factor == 0 && y == 0)
+          {
+              //Correct spot so save this data
+              reduced->rawImageData[reducedCount] = inputImage->imageData[y][x];
+              //Iterate our reduced counter
+              reducedCount++;
+          }
+          //Check if x mod factor = 0 and y mod factor = 0
+          else if(x % factor == 0 && y % factor == 0)
+          {
+              //Correct spot so save this data
+              reduced->rawImageData[reducedCount] = inputImage->imageData[y][x];
+              //Iterate our reduced counter
+              reducedCount++;
+          }
         }
     }
 
     //Call method to convert rawImageData to imageData so that reduced can be outputted
     rawDataToImageData(reduced);
 
-    return 0;
+    return SUCCESS_NO_ERRORS;
 }
