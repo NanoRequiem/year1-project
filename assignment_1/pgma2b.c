@@ -64,7 +64,6 @@ int main(int argc, char **argv)
 		return readStatus;
 	}
 
-
 	//Close the opened file since we don't need it anymore
 	fclose(data);
 

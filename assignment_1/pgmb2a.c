@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "imageStructures.h"
-#include "pgma2b.h"
+#include "pgmb2a.h"
 #include "readFile.h"
 #include "outputFile.h"
 
