@@ -7,6 +7,11 @@
 #include "readFile.h"
 #include "outputFile.h"
 
+#define SUCCESS_NO_ERRORS 0
+#define FAIL_BAD_ARGS 1
+#define FAIL_BAD_FNAME 2
+#define FAIL_BAD_OUTPUT 9
+
 //Main method to read in cmd line arguments and call
 //modules to read in files
 int main(int argc, char **argv)
@@ -22,7 +27,7 @@ int main(int argc, char **argv)
   if(validateCmdArguments(3, argc) == 1)
   {
     printf("ERROR: Bad argument count\n");
-		return 1;
+		return FAIL_BAD_ARGS;
   }
 
   //Create the image structure
@@ -37,7 +42,7 @@ int main(int argc, char **argv)
 	{
 		printf("ERROR: Bad File Name(%s)\n", argv[1]);
 
-		return 2;
+		return FAIL_BAD_FNAME;
 	}
 
 	//Calling the InitImage method to initialize the struct
@@ -49,11 +54,13 @@ int main(int argc, char **argv)
 	//if the data read in was not successful output file name and error code;
 	if(readStatus != 0)
 	{
+    //Output the file name (readFile module outputs the rest of the error message)
 		printf("(%s)\n", argv[1]);
 
 		//Close file since we've stopped using it due to error
 		fclose(data);
 
+    //Error value obtained from the read image module
 		return readStatus;
 	}
 
@@ -68,11 +75,11 @@ int main(int argc, char **argv)
 	int outStatus = outputImage(inputImage, argv[2]);
 
 	if(outStatus != 0) {
-		printf("ERROR: Output failed");
-		return 14;
+		printf("ERROR: Output failed (%s)\n", argv[2]);
+		return FAIL_BAD_OUTPUT;
 	}
 
 	//Success message
 	printf("CONVERTED\n");
-  return 0;
+  return SUCCESS_NO_ERRORS;
 }

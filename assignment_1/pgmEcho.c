@@ -10,6 +10,7 @@
 #define SUCCESS_NO_ERRORS 0
 #define FAIL_BAD_ARGS 1
 #define FAIL_BAD_FNAME 2
+#define FAIL_BAD_OUTPUT 9
 
 //Main method for reading in cmd line arguments
 //
@@ -58,11 +59,13 @@ int main(int argc, char **argv)
 	//if the data read in was not successful output file name and error code;
 	if(readStatus != 0)
 	{
+		//Output the file name (readFile module outputs the rest of the error message)
 		printf("(%s)\n", argv[1]);
 
 		//Close file since we've stopped using it due to error
 		fclose(data);
 
+    //Error value obtained from the read image module
 		return readStatus;
 	}
 
@@ -75,8 +78,8 @@ int main(int argc, char **argv)
 	//output message if the program fails to output a file
 	if(outStatus != 0)
 	{
-		printf("(%s)\n", argv[1]);
-		return outStatus;
+		printf("ERROR: Output failed (%s)\n", argv[2]);
+		return FAIL_BAD_OUTPUT;
 	}
 	//Output message if the program successfully executes
 	printf("ECHOED\n");
