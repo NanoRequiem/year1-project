@@ -6,6 +6,9 @@ make clean - Removes all executable files
 
 HOW TO RUN EACH PROGRAM
 
+The following must be ran in the directory where the object files are stored within
+the command line.
+
 pgmEcho - ./pgmEcho inputImage.pgm outputImage.pgm
 pgmComp - ./pgmComp inputImage.pgm inputImage.pgm
 pgma2b - ./pgma2b inputImage.pgm outputImage.pgm
