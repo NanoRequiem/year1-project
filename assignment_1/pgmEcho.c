@@ -7,6 +7,10 @@
 #include "outputFile.h"
 #include "pgmEcho.h"
 
+#define SUCCESS_NO_ERRORS 0
+#define FAIL_BAD_ARGS 1
+#define FAIL_BAD_FNAME 2
+
 //Main method for reading in cmd line arguments
 //
 //argc = number of command line arguments
@@ -14,12 +18,19 @@
 
 int main(int argc, char **argv)
 {
+	//If no arguments are supplied output the correct arguments
+  if(argc == 1)
+  {
+    printf("Usage: ./pgmEcho inputImage.pgm outputImage.pgm\n");
+    return 0;
+  }
+
 	//Call method to check the number of cmd line arguements
 	//if returns false error the program and exit
 	if(validateCmdArguments(3, argc) == 1)
 	{
 		printf("ERROR: Bad argument count\n");
-		return 1;
+		return FAIL_BAD_ARGS;
 	}
 
 	//Create the image structure
@@ -35,7 +46,7 @@ int main(int argc, char **argv)
 	{
 		printf("ERROR: Bad File Name(%s)\n", argv[1]);
 
-		return 2;
+		return FAIL_BAD_FNAME;
 	}
 
 	//Calling the InitImage method to initialize the struct
@@ -69,5 +80,5 @@ int main(int argc, char **argv)
 	}
 	//Output message if the program successfully executes
 	printf("ECHOED\n");
-	return 0;
+	return SUCCESS_NO_ERRORS;
 }

@@ -16,6 +16,13 @@
 
 int main(int argc, char **argv)
 {
+  //If no arguments are supplied output the correct arguments
+  if(argc == 1)
+  {
+    printf("Usage: ./pgmComp inputImage.pgm inputImage.pgm\n");
+    return 0;
+  }
+
   //Check that enough command line arguments have been supplied
   //if not output error
   if(validateCmdArguments(3, argc) == 1)

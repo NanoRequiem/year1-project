@@ -11,6 +11,13 @@
 //modules to read in files
 int main(int argc, char **argv)
 {
+  //If no arguments are supplied output the correct arguments
+  if(argc == 1)
+  {
+    printf("Usage: ./pgmb2a inputImage.pgm outputImage.pgm\n");
+    return 0;
+  }
+
   //Check that the number of commend line arguments is correct
   if(validateCmdArguments(3, argc) == 1)
   {

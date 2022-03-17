@@ -15,14 +15,21 @@
 
 int main(int argc, char **argv)
 {
-    //Call method for reading in command line arguments
-    if(validateCmdArguments(4, argc) == 1)
+  //If no arguments are supplied output the correct arguments
+  if(argc == 1)
+  {
+    printf("Usage: ./pgmReduce inputImage.pgm reduction_factor outputImage.pgm\n");
+    return 0;
+  }
+
+  //Call method for reading in command line arguments
+  if(validateCmdArguments(4, argc) == 1)
 	{
 		printf("ERROR: Bad argument count\n");
 		return 1;
 	}
 
-    //Create the image structure
+  //Create the image structure
 	Image *inputImage = (Image *)malloc( sizeof(Image) );
 
 
@@ -119,7 +126,7 @@ int reduceImage(Image *inputImage, Image *reduced, int factor)
     //Loop through input image and output when the x and y values mod to 0 with factor
     for(int y = 0; y < inputImage->height; y++)
     {
-        
+
         for(int x = 0; x < inputImage->width; x++)
         {
             //Check if x = 0 and y = 0
