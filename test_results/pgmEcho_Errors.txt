@@ -1,0 +1,28 @@
+pgmEcho file exists: 						 PASSED
+pgmEcho correct message for wrong # of parameters: FAILED
+pgmEcho correct return code for wrong # of parameters: PASSED
+pgmEcho correct return code with bad filename: PASSED
+pgmEcho correct error string with bad filename: FAILED
+pgmEcho correct return code for non-readable file: PASSED
+pgmEcho correct error string for non-readable file: FAILED
+pgmEcho correct return on bad magic number: PASSED
+pgmEcho correct error string on bad magic number: FAILED
+pgmEcho correct return on bad dimensions (-1): PASSED
+pgmEcho correct error string on bad dimensions (-1): FAILED
+pgmEcho correct return on bad dimensions (65536): FAILED
+pgmEcho correct error string on bad dimensions (65536): FAILED
+pgmEcho correct return on bad max gray value: PASSED
+pgmEcho correct error string on bad max gray value: FAILED
+pgmEcho correct return on large comment: FAILED 
+pgmEcho correct return on too much data: FAILED
+pgmEcho correct output string on too much data: FAILED
+pgmEcho correct return on too little data: FAILED 
+pgmEcho correct output string on too little data: FAILED 
+pgmEcho correct return on failed malloc: FAILED 
+pgmEcho correct error string on failed malloc: FAILED 
+pgmEcho correct usage message for no parameters: PASSED
+pgmEcho correct result code for no parameters: PASSED 
+pgmEcho correct return on non-writeable file: FAILED 
+pgmEcho correct error string on non-writeable file: FAILED 
+pgmEcho generates an identical ascii file: PASSED 
+pgmEcho generates an identical binary file: PASSED 

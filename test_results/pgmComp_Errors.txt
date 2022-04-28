@@ -1,0 +1,32 @@
+pgmComp file exists: 						 PASSED
+pgmComp correct message for wrong # of parameters: FAILED
+pgmComp correct return code for wrong # of parameters: PASSED
+pgmComp correct return code with bad filename: PASSED
+pgmComp correct error string with bad filename: FAILED
+pgmComp correct return code for non-readable file: PASSED
+pgmComp correct error string for non-readable file: FAILED
+pgmComp correct return on bad magic number: PASSED
+pgmComp correct error string on bad magic number: FAILED
+pgmComp correct return on bad dimensions (-1): PASSED
+pgmComp correct error string on bad dimensions (-1): FAILED
+pgmComp correct return on bad dimensions (65536): FAILED
+pgmComp correct error string on bad dimensions (65536): FAILED
+pgmComp correct return on bad max gray value: PASSED
+pgmComp correct error string on bad max gray value: FAILED
+pgmComp correct return on large comment: FAILED
+pgmComp correct return on too much data: FAILED
+pgmComp correct output string on too much data: FAILED
+pgmComp correct return on too little data: FAILED
+pgmComp correct output string on too little data: FAILED
+pgmComp correct return on failed malloc: FAILED
+pgmComp correct error string on failed malloc: FAILED
+pgmComp correct usage message for no parameters: PASSED
+pgmComp correct result code for no parameters: PASSED
+pgmComp successfully compares identical images: PASSED
+pgmComp successfully compares identical images: PASSED
+pgmComp successfully compares non-identical images: PASSED
+pgmComp successfully compares non-identical images: PASSED
+pgmComp successfully compares identical ascii -> binary images return code: PASSED
+pgmComp successfully compares identical ascii -> binary images: PASSED
+pgmComp successfully compares non-identical ascii -> binary images return code: PASSED
+pgmComp successfully compares non-identical ascii -> binary images: PASSED
