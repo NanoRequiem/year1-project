@@ -1,32 +1,32 @@
 pgma2b file exists: 						 PASSED
-pgma2b correct message for wrong # of parameters: FAILED
+pgma2b correct message for wrong # of parameters: FAILED *
 pgma2b correct return code for wrong # of parameters: PASSED
 pgma2b correct return code with bad filename: PASSED
-pgma2b correct error string with bad filename: FAILED
+pgma2b correct error string with bad filename: FAILED *
 pgma2b correct return code for non-readable file: PASSED
-pgma2b correct error string for non-readable file: FAILED
+pgma2b correct error string for non-readable file: FAILED *
 pgma2b correct return on bad magic number: PASSED
-pgma2b correct error string on bad magic number: FAILED
+pgma2b correct error string on bad magic number: FAILED *
 pgma2b correct return on bad dimensions (-1): PASSED
-pgma2b correct error string on bad dimensions (-1): FAILED
-pgma2b correct return on bad dimensions (65536): FAILED
-pgma2b correct error string on bad dimensions (65536): FAILED
+pgma2b correct error string on bad dimensions (-1): FAILED *
+pgma2b correct return on bad dimensions (65536): FAILED *
+pgma2b correct error string on bad dimensions (65536): FAILED *
 pgma2b correct return on bad max gray value: PASSED
-pgma2b correct error string on bad max gray value: FAILED
-pgma2b correct return on large comment: FAILED
-pgma2b correct return on too much data: FAILED
-pgma2b correct output string on too much data: FAILED
-pgma2b correct return on too little data: FAILED
-pgma2b correct output string on too little data: FAILED
-pgma2b correct return on failed malloc: FAILED
-pgma2b correct error string on failed malloc: FAILED
+pgma2b correct error string on bad max gray value: FAILED *
+pgma2b correct return on large comment: FAILED *
+pgma2b correct return on too much data: FAILED *
+pgma2b correct output string on too much data: FAILED *
+pgma2b correct return on too little data: FAILED *
+pgma2b correct output string on too little data: FAILED *
+pgma2b correct return on failed malloc: FAILED *
+pgma2b correct error string on failed malloc: FAILED *
 pgma2b correct usage message for no parameters: PASSED
 pgma2b correct result code for no parameters: PASSED
 pgma2b check return code on success: PASSED
 pgma2b check output string on success: PASSED
-pgma2b correct return on non-writeable file: FAILED
-pgma2b correct error string on non-writeable file: FAILED
-pgma2b check return code for binary input file: FAILED
-pgma2b check error string for binary input file: FAILED
+pgma2b correct return on non-writeable file: FAILED *
+pgma2b correct error string on non-writeable file: FAILED *
+pgma2b check return code for binary input file: FAILED *
+pgma2b check error string for binary input file: FAILED *
 pgma2b successfully converts files: PASSED
 

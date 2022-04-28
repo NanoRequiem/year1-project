@@ -1,31 +1,31 @@
 pgmReduce file exists: 						 PASSED
 pgmReduce correct usage message for no parameters: PASSED
 pgmReduce correct result code for no parameters: PASSED
-pgmReduce correct error string for 1 parameter: FAILED
+pgmReduce correct error string for 1 parameter: FAILED *
 pgmReduce correct result code for 1 parameter: PASSED
-pgmReduce correct error string for 2 parameters: FAILED
+pgmReduce correct error string for 2 parameters: FAILED *
 pgmReduce correct result code for 2 parameters: PASSED
-pgmReduce correct output string for non-numeric scaling factor: FAILED
-pgmReduce correct return code for non-numeric scaling fractor: FAILED
-pgmReduce correct output string for negative scaling factor: FAILED
-pgmReduce correct return code for negative scaling fractor: FAILED
-pgmReduce correct output string for non-readable file: FAILED
+pgmReduce correct output string for non-numeric scaling factor: FAILED *
+pgmReduce correct return code for non-numeric scaling fractor: FAILED *
+pgmReduce correct output string for negative scaling factor: FAILED *
+pgmReduce correct return code for negative scaling fractor: FAILED *
+pgmReduce correct output string for non-readable file: FAILED *
 pgmReduce correct return code for non-readable file: PASSED
-pgmReduce correct output string for bad magic number: FAILED
+pgmReduce correct output string for bad magic number: FAILED *
 pgmReduce correct return code for bad magic number: PASSED
-pgmReduce correct output string for bad comment: FAILED
-pgmReduce correct output string for bad dimensions: FAILED
+pgmReduce correct output string for bad comment: FAILED *
+pgmReduce correct output string for bad dimensions: FAILED *
 pgmReduce correct return code for bad dimensions: PASSED
-pgmReduce correct output string for bad gray: FAILED
+pgmReduce correct output string for bad gray: FAILED *
 pgmReduce correct return code for bad gray: PASSED
-pgmReduce correct return on too much data: FAILED
-pgmReduce correct output string on too much data: FAILED
-pgmReduce correct return on too little data: FAILED
-pgmReduce correct output string on too little data: FAILED
-pgmReduce correct return on failed malloc: FAILED
-pgmReduce correct error string on failed malloc: FAILED
-pgmReduce correct return on non-writeable file: FAILED
-pgmReduce correct error string on non-writeable file: FAILED
+pgmReduce correct return on too much data: FAILED *
+pgmReduce correct output string on too much data: FAILED *
+pgmReduce correct return on too little data: FAILED *
+pgmReduce correct output string on too little data: FAILED *
+pgmReduce correct return on failed malloc: FAILED *
+pgmReduce correct error string on failed malloc: FAILED *
+pgmReduce correct return on non-writeable file: FAILED *
+pgmReduce correct error string on non-writeable file: FAILED *
 pgmReduce correct output string for good downsampling: PASSED
 pgmReduce correct return code for good downsampling: PASSED
-pgmReduce successfully downsampling comparison: FAILED
+pgmReduce successfully downsampling comparison: FAILED *

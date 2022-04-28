@@ -1,0 +1,65 @@
+pgmEcho.c: 5 to do
+pgmEcho correct message for wrong # of parameters: NOT DONE
+pgmEcho correct error string with bad filename: NOT DONE
+pgmEcho correct error string for non-readable file: NOT DONE
+pgmEcho correct return on non-writeable file: NOT DONE
+pgmEcho correct error string on non-writeable file: NOT DONE
+
+readFile.c: 10 to do
+correct error string on bad magic number: NOT DONE
+correct error string on bad dimensions (-1): NOT DONE
+correct return on bad dimensions (65536): NOT DONE
+correct error string on bad dimensions (65536): NOT DONE
+correct error string on bad max gray value: NOT DONE
+correct return on large comment: NOT DONE
+correct return on too much data: NOT DONE
+correct output string on too much data: NOT DONE
+correct return on too little data: NOT DONE
+correct output string on too little data: NOT DONE
+
+outputFile.c: 2 to do
+correct return on failed malloc: NOT DONE
+pgmEcho correct error string on failed malloc: NOT DONE
+
+pgmComp.c: 3 to do
+correct message for wrong # of parameters: NOT DONE
+correct error string with bad filename: NOT DONE
+correct error string for non-readable file: NOT DONE
+
+pgma2b.c: 7 to do
+correct message for wrong # of parameters: NOT DONE
+correct error string with bad filename: NOT DONE
+correct error string for non-readable file: NOT DONE
+correct return on non-writeable file: NOT DONE
+correct error string on non-writeable file: NOT DONE
+check return code for binary input file: NOT DONE
+check error string for binary input file: NOT DONE
+
+pgmb2a.c: 7 to do
+correct message for wrong # of parameters: NOT DONE
+correct error string with bad filename: NOT DONE
+correct error string for non-readable file: NOT DONE
+correct return on non-writeable file: NOT DONE
+correct error string on non-writeable file: NOT DONE
+check return code for ascii input file: NOT DONE
+check error string for ascii input file: NOT DONE
+
+pgmReduce.c: 10 to do
+correct error string for 1 parameter: NOT DONE
+correct error string for 2 parameters: NOT DONE
+correct output string for non-numeric scaling factor: NOT DONE
+correct return code for non-numeric scaling fractor: NOT DONE
+correct output string for negative scaling factor: NOT DONE
+correct return code for negative scaling fractor: NOT DONE
+correct output string for non-readable file: NOT DONE
+correct return on non-writeable file: NOT DONE
+correct error string on non-writeable file: NOT DONE
+successfully downsampling comparison: NOT DONE
+
+
+
+
+
+
+
+
