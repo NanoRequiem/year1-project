@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 
 #include "imageStructures.h"
@@ -27,7 +28,7 @@ int main(int argc, char **argv)
   //Check that the number of commend line arguments is correct
   if(validateCmdArguments(3, argc) == 1)
   {
-    printf("ERROR: Bad argument count\n");
+    printf("ERROR: Bad Argument Count ");
 		return FAIL_BAD_ARGS;
   }
 
@@ -41,10 +42,17 @@ int main(int argc, char **argv)
 	//Check if the file has been opened and output error message if not
 	if(data == NULL)
 	{
-		printf("ERROR: Bad File Name(%s)\n", argv[1]);
+		printf("ERROR: Bad File Name (%s) ", argv[1]);
 
 		return FAIL_BAD_FNAME;
 	}
+
+  //Check if the file can be read and output error message if not
+  if(access(argv[1], R_OK)) {
+    printf("ERROR: Miscellaneous (File cannot be read) \n");
+
+    return FAIL_MISC;
+  }
 
 	//Calling the InitImage method to initialize the struct
 	//The integer readStatus will hold whether the data was
@@ -71,7 +79,7 @@ int main(int argc, char **argv)
   //Check that the inputted image is an ascii image
   if(inputImage->magicNumber[1] == '5')
   {
-    printf("ERROR: Miscellaneous(binary File was inputted when ASCII file required)\n");
+    printf("ERROR: Miscellaneous (binary File was inputted when ASCII file required)\n");
 
     return FAIL_MISC;
   }
