@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 
 #include "imageStructures.h"
@@ -9,6 +10,7 @@
 #define SUCCESS_NO_ERRORS 0
 #define FAIL_BAD_FNAME 2
 #define FAIL_BAD_OUTPUT 9
+#define FAIL_MISC 100
 
 int outputImage(Image *inputImage, char *outFile)
 {
@@ -24,6 +26,13 @@ int outputImage(Image *inputImage, char *outFile)
     printf("ERROR: Bad File Name (%s)\n", outFile);
     freeImage(inputImage);
     return FAIL_BAD_FNAME;
+  }
+
+  //Check if the file can be written to and output error message if not
+  if(access(outFile, W_OK) != 0) {
+    printf("ERROR: Miscellaneous (File is non-writable) \n");
+
+    return FAIL_MISC;
   }
 
   //Writing magic number, comment line, max gray, height and width values

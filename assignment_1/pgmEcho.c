@@ -81,12 +81,6 @@ int main(int argc, char **argv)
 	//Close the file since we have read everything we need from it
 	fclose(data);
 
-  //Check if the file can be written to and output error message if not
-  if(access(argv[2], W_OK)) {
-    printf("ERROR: Miscellaneous (File is non-writable) \n");
-
-    return FAIL_MISC;
-  }
 
 	//Calling module to output read in data to a file
 	int outStatus = outputImage(inputImage, argv[2]);

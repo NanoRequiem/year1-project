@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 
 #include "imageStructures.h"
@@ -10,6 +11,7 @@
 #define FAIL_BAD_ARGS 1
 #define FAIL_BAD_FNAME 2
 #define FAIL_BAD_OUTPUT 9
+#define FAIL_MISC 100
 
 #define DIFFERENT_VALUE 1
 
@@ -34,7 +36,7 @@ int main(int argc, char **argv)
   //if not output error
   if(validateCmdArguments(3, argc) == 1)
   {
-    printf("ERROR: Bad argument count\n");
+    printf("ERROR: Bad Argument Count");
 		return FAIL_BAD_ARGS;
   }
 
@@ -50,10 +52,17 @@ int main(int argc, char **argv)
   //Check the first image file has been opened
   if(firstData == NULL)
 	{
-		printf("ERROR: Bad File Name(%s)\n", argv[1]);
+		printf("ERROR: Bad File Name (%s)", argv[1]);
 
 		return FAIL_BAD_FNAME;
 	}
+
+  //Check if the first file can be read and output error message if not
+  if(access(argv[1], R_OK)) {
+    printf("ERROR: Miscellaneous (File cannot be read) \n");
+
+    return FAIL_MISC;
+  }
 
   //read in data for the first image
   initImage(firstImage);
@@ -78,12 +87,19 @@ int main(int argc, char **argv)
   secondData = fopen(argv[2], "r");
 
   //check the second image has been opened
-  if(firstData == NULL)
+  if(secondData == NULL)
 	{
-		printf("ERROR: Bad File Name(%s)\n", argv[2]);
+		printf("ERROR: Bad File Name (%s)", argv[2]);
 
 		return FAIL_BAD_FNAME;
 	}
+
+  //Check if the second file can be read and output error message if not
+  if(access(argv[2], R_OK)) {
+    printf("ERROR: Miscellaneous (File cannot be read) \n");
+
+    return FAIL_MISC;
+  }
 
   //Read in data for the second image
   initImage(secondImage);
