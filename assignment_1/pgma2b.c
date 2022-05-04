@@ -79,7 +79,7 @@ int main(int argc, char **argv)
   //Check that the inputted image is an ascii image
   if(inputImage->magicNumber[1] == '5')
   {
-    printf("ERROR: Miscellaneous (binary File was inputted when ASCII file required)\n");
+    printf("ERROR: Miscellaneous (binary File was inputted when ASCII file required)");
 
     return FAIL_MISC;
   }
