@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 
 #include "imageStructures.h"
@@ -11,6 +12,7 @@
 #define FAIL_BAD_ARGS 1
 #define FAIL_BAD_FNAME 2
 #define FAIL_BAD_OUTPUT 9
+#define FAIL_MISC 100
 
 //Main method for reading in cmd line arguments
 //
@@ -30,7 +32,7 @@ int main(int argc, char **argv)
 	//if returns false error the program and exit
 	if(validateCmdArguments(3, argc) == 1)
 	{
-		printf("ERROR: Bad argument count\n");
+		printf("ERROR: Bad Argument Count \n");
 		return FAIL_BAD_ARGS;
 	}
 
@@ -45,10 +47,17 @@ int main(int argc, char **argv)
 	//Check if the file has been opened and output error message if not
 	if(data == NULL)
 	{
-		printf("ERROR: Bad File Name(%s)\n", argv[1]);
+		printf("ERROR: Bad File Name (%s) \n", argv[1]);
 
 		return FAIL_BAD_FNAME;
 	}
+
+  //Check if the file can be read and output error message if not
+  if(access(argv[1], R_OK)) {
+    printf("ERROR: Miscellaneous (File cannot be read) \n");
+
+    return FAIL_MISC;
+  }
 
 	//Calling the InitImage method to initialize the struct
 	//The integer readStatus will hold whether the data was
@@ -72,13 +81,20 @@ int main(int argc, char **argv)
 	//Close the file since we have read everything we need from it
 	fclose(data);
 
+  //Check if the file can be written to and output error message if not
+  if(access(argv[2], W_OK)) {
+    printf("ERROR: Miscellaneous (File is non-writable) \n");
+
+    return FAIL_MISC;
+  }
+
 	//Calling module to output read in data to a file
 	int outStatus = outputImage(inputImage, argv[2]);
 
 	//output message if the program fails to output a file
 	if(outStatus != 0)
 	{
-		printf("ERROR: Output failed (%s)\n", argv[2]);
+		printf("ERROR: Output Failed (%s)\n", argv[2]);
 		return FAIL_BAD_OUTPUT;
 	}
 	//Output message if the program successfully executes
