@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 
 #include "imageStructures.h"
@@ -12,6 +13,7 @@
 #define FAIL_BAD_ARGS 1
 #define FAIL_BAD_FNAME 2
 #define FAIL_BAD_OUTPUT 9
+#define FAIL_MISC 100
 
 //Main method for reading in cmd line arguments
 //
@@ -31,8 +33,23 @@ int main(int argc, char **argv)
   if(validateCmdArguments(4, argc) == 1)
 	{
 		printf("ERROR: Bad argument count\n");
-		return 1;
+		return FAIL_BAD_ARGS;
 	}
+
+  //Convert argv[2] into and integer to be used
+  int factor;
+
+  //Checks if reduction factor is an integer or not
+  if(!sscanf(argv[2], "%d", &factor)) {
+    printf("ERROR: Miscellaneous (Reduction factor must be an numeric)");
+    return FAIL_MISC;
+  }
+
+  //Checks if reduction factor is Negative
+  if(argv[2] < 0) {
+    printf("ERROR: Miscellaneous (Negative reduction factor not accepted)");
+    return FAIL_MISC;
+  }
 
   //Create the image structure
 	Image *inputImage = (Image *)malloc( sizeof(Image) );
@@ -49,6 +66,13 @@ int main(int argc, char **argv)
 
 		return FAIL_BAD_FNAME;
 	}
+
+  //Check if the file can be read and output error message if not
+  if(access(argv[1], R_OK)) {
+    printf("ERROR: Miscellaneous (File cannot be read) \n");
+
+    return FAIL_MISC;
+  }
 
 	//Calling the InitImage method to initialize the struct
 	//The integer readStatus will hold whether the data was
@@ -74,8 +98,8 @@ int main(int argc, char **argv)
   Image *reduce = (Image *)malloc( sizeof(Image));
 
   //Convert argv[2] into and integer to be used
-  int factor;
-  sscanf(argv[2], "%d", &factor);
+  //int factor;
+  //sscanf(argv[2], "%d", &factor);
 
   //Calls function to initialise the reduce image Struct's data
   initImage(reduce);
@@ -94,8 +118,8 @@ int main(int argc, char **argv)
 		return outStatus;
 	}
 
-    printf("REDUCED\n");
-    return SUCCESS_NO_ERRORS;
+  printf("REDUCED\n");
+  return SUCCESS_NO_ERRORS;
 }
 
 //initReduced method for initializing the reduced file
