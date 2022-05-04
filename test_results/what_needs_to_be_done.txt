@@ -1,9 +1,9 @@
-pgmEcho.c: 5 to do
-pgmEcho correct message for wrong # of parameters: NOT DONE
-pgmEcho correct error string with bad filename: NOT DONE
-pgmEcho correct error string for non-readable file: NOT DONE
-pgmEcho correct return on non-writeable file: NOT DONE
-pgmEcho correct error string on non-writeable file: NOT DONE
+pgmEcho.c: 0 to do | 5 to test
+pgmEcho correct message for wrong # of parameters: NEEDS TESTING
+pgmEcho correct error string with bad filename: NEEDS TESTING
+pgmEcho correct error string for non-readable file: NEEDS TESTING
+pgmEcho correct return on non-writeable file: NEEDS TESTING
+pgmEcho correct error string on non-writeable file: NEEDS TESTING
 
 readFile.c: 10 to do
 correct error string on bad magic number: NOT DONE
@@ -21,39 +21,39 @@ outputFile.c: 2 to do
 correct return on failed malloc: NOT DONE
 pgmEcho correct error string on failed malloc: NOT DONE
 
-pgmComp.c: 3 to do
-correct message for wrong # of parameters: NOT DONE
-correct error string with bad filename: NOT DONE
-correct error string for non-readable file: NOT DONE
+pgmComp.c: 0 to do | 3 to test
+correct message for wrong # of parameters: NEEDS TESTING
+correct error string with bad filename: NEEDS TESTING
+correct error string for non-readable file: NEEDS TESTING
 
-pgma2b.c: 7 to do
-correct message for wrong # of parameters: NOT DONE
-correct error string with bad filename: NOT DONE
-correct error string for non-readable file: NOT DONE
-correct return on non-writeable file: NOT DONE
-correct error string on non-writeable file: NOT DONE
-check return code for binary input file: NOT DONE
-check error string for binary input file: NOT DONE
+pgma2b.c: 0 to do | 7 to test
+correct message for wrong # of parameters: NEEDS TESTING
+correct error string with bad filename: NEEDS TESTING
+correct error string for non-readable file: NEEDS TESTING
+correct return on non-writeable file: NEEDS TESTING
+correct error string on non-writeable file: NEEDS TESTING
+check return code for binary input file: NEEDS TESTING? (in file and successful within my program but failed test)
+check error string for binary input file: NEEDS TESTING? (in file and successful within my program but failed test)
 
-pgmb2a.c: 7 to do
-correct message for wrong # of parameters: NOT DONE
-correct error string with bad filename: NOT DONE
-correct error string for non-readable file: NOT DONE
-correct return on non-writeable file: NOT DONE
-correct error string on non-writeable file: NOT DONE
-check return code for ascii input file: NOT DONE
-check error string for ascii input file: NOT DONE
+pgmb2a.c: 0 to do | 7 to test
+correct message for wrong # of parameters: NEEDS TESTING
+correct error string with bad filename: NEEDS TESTING
+correct error string for non-readable file: NEEDS TESTING
+correct return on non-writeable file: NEEDS TESTING
+correct error string on non-writeable file: NEEDS TESTING
+check return code for ascii input file: NEEDS TESTING? (in file and successful within my program but failed test)
+check error string for ascii input file: NEEDS TESTING? (in file and successful within my program but failed test)
 
-pgmReduce.c: 10 to do
-correct error string for 1 parameter: NOT DONE
-correct error string for 2 parameters: NOT DONE
-correct output string for non-numeric scaling factor: NOT DONE
-correct return code for non-numeric scaling fractor: NOT DONE
-correct output string for negative scaling factor: NOT DONE
-correct return code for negative scaling fractor: NOT DONE
-correct output string for non-readable file: NOT DONE
-correct return on non-writeable file: NOT DONE
-correct error string on non-writeable file: NOT DONE
+pgmReduce.c: 3 to do| 7 to test
+correct error string for 1 parameter: NOT DONE (QUESTION ASKED ABOUT THIS)
+correct error string for 2 parameters: NOT DONE (QUESTION ASKED ABOUT THIS)
+correct output string for non-numeric scaling factor: NEEDS TESTING
+correct return code for non-numeric scaling fractor: NEEDS TESTING
+correct output string for negative scaling factor: NEEDS TESTING
+correct return code for negative scaling fractor: NEEDS TESTING
+correct output string for non-readable file: NEEDS TESTING
+correct return on non-writeable file: NEEDS TESTING
+correct error string on non-writeable file: NEEDS TESTING
 successfully downsampling comparison: NOT DONE
 
 
