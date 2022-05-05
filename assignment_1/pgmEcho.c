@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 	int readStatus = readImageHead(inputImage, data);
 
 	//if the data read in was not successful output file name and error code;
-	if(readStatus != 0)
+	if(readStatus != 0 && readStatus != FAIL_MISC)
 	{
 		//Output the file name (readFile module outputs the rest of the error message)
 		printf("(%s)\n", argv[1]);

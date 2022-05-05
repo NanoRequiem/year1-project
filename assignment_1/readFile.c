@@ -64,7 +64,7 @@ int readImageHead(Image *inputImage, FILE *data)
 	//Checks if magic numebr is correct
 	if (*magic_Number != 0x3250 && *magic_Number != 0x3550)
 	{
-		printf("ERROR: Bad Magic Number");
+		printf("ERROR: Bad Magic Number ");
 
 		freeImage(inputImage);
 
@@ -73,6 +73,9 @@ int readImageHead(Image *inputImage, FILE *data)
 
 	//Used to scan for whitespace
 	int scanCount = fscanf(data, " ");
+
+	//Used to count through commentLine inputted
+	int commentCount = 0;
 
 	//Next char to check for a comment line. If it's there save it
 	//If not put character back and continue
@@ -83,17 +86,18 @@ int readImageHead(Image *inputImage, FILE *data)
 		inputImage->commentLine = (char *) malloc(128);
 
 		//Capturing input commentLine
-		char *comment = fgets(inputImage->commentLine, 128, data);
-		printf("%s", inputImage->commentLine);
+		while(nextChar != '\n') {
+			inputImage->commentLine[commentCount] = nextChar;
 
-		//Checking if comment line has been read Null means failure
-		if(comment == NULL)
-		{
-			printf("ERROR: Bad Comment Line");
+			nextChar = getc(data);
 
-			freeImage(inputImage);
+			commentCount++;
 
-			return FAIL_BAD_COMMENT_LINE;
+			if(commentCount > 128) {
+				printf("ERROR: Miscellaneous (Comment too large)");
+
+				return FAIL_MISC;
+			}
 		}
 	}
 	else
@@ -118,10 +122,10 @@ int readImageHead(Image *inputImage, FILE *data)
 	}
 
 	//Validation checks for the width and heightvalues
-	if(inputImage->width < 1 || inputImage->width > 65536 ||
-		inputImage->height < 1 || inputImage->height > 65536)
+	if(inputImage->width < 1 || inputImage->width >= 65536 ||
+		inputImage->height < 1 || inputImage->height >= 65536)
 	{
-		printf("ERROR: Bad Dimensions");
+		printf("ERROR: Bad Dimensions ");
 
 		freeImage(inputImage);
 
@@ -131,7 +135,7 @@ int readImageHead(Image *inputImage, FILE *data)
 	//Validation check for maxGray value
 	if(inputImage->maxGray != 255)
 	{
-		printf("ERROR: Bad Max GrayValue ");
+		printf("ERROR: Bad Max Gray Value ");
 		return FAIL_BAD_MAX_GRAY;
 	}
 
@@ -167,36 +171,78 @@ int readASCIIData(Image *inputImage, FILE *data)
 		inputImage->imageData[x] = (int*)malloc(inputImage->width * sizeof(int));
 	}
 
+	//values to index the 2D array
+	int x = 0;
+	int y = 0;
+	//Value to count the amount read
+	int countRead = 0;
+
 	//For loop that goes through all of the image's data and saves it
 	//First for loop goes through the rows of the 2d array where as the
 	//second for loop goes through the columns of the 2d array.
-	for(int y = 0; y < inputImage->height; y++)
+	while(fscanf(data, " %u",&(inputImage->imageData[y][x])) == 1)
 	{
-		for(int x = 0; x < inputImage-> width; x++)
+		printf("x = %d, y = %d\n", x, y);
+		countRead++;
+		//Validation check on the captured data
+		if(inputImage->imageData[y][x] < 0 ||
+				inputImage->imageData[y][x] > 255)
 		{
-			//Captures data from file for the imageData 2d array
-			int scanCount = fscanf(data, " %u",&(inputImage->imageData[y][x]));
-			//Validate that correct amount of data was read in
-			if(scanCount != 1)
+			printf("ERROR: Bad Data ");
+
+			freeImage(inputImage);
+
+			return FAIL_BAD_DATA;
+		}
+		//iterate over counter variables
+		if(x >= inputImage->width - 1)
+		{
+			x = 0;
+			y++;
+
+			//Check that once the program should get to the end of a line it actually does
+			char nextChar = getc(data);
+			if(nextChar != '\n')
 			{
-				printf("ERROR: Miscellaneous (Bad Data formatting)");
-
-				freeImage(inputImage);
-
-				return FAIL_MISC;
-			}
-
-			//Validation check on the captured data
-			if(inputImage->imageData[y][x] < 0 ||
-					inputImage->imageData[y][x] > 255)
-			{
-				printf("ERROR: Bad Data");
+				printf("ERROR: Bad Data ");
 
 				freeImage(inputImage);
 
 				return FAIL_BAD_DATA;
 			}
+
+			//ensure that a segmentation fault does not occur
+			if(y >= inputImage->height)
+			{
+				break;
+			}
 		}
+		else
+		{
+			x++;
+		}
+	}
+
+	int datacheck = 0;
+
+	//Check that there is no remaining data in the file
+	if(fscanf(data, " %u", &datacheck) == 1)
+	{
+		printf("ERROR: Bad Data ");
+
+		freeImage(inputImage);
+
+		return FAIL_BAD_DATA;
+	}
+
+	//check that enough data was read in
+	if(countRead < inputImage->width * inputImage->height)
+	{
+		printf("ERROR: Bad Data ");
+
+		freeImage(inputImage);
+
+		return FAIL_BAD_DATA;
 	}
 
 	//Converts and stores current stored data as raw binary data
@@ -208,7 +254,7 @@ int readASCIIData(Image *inputImage, FILE *data)
 
 		freeImage(inputImage);
 
-		return 15;
+		return FAIL_MISC;
 	}
 
 	return SUCCESS_NO_ERRORS;
