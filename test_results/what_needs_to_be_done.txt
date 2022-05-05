@@ -5,21 +5,22 @@ pgmEcho correct error string for non-readable file: NEEDS TESTING
 pgmEcho correct return on non-writeable file: NEEDS TESTING
 pgmEcho correct error string on non-writeable file: NEEDS TESTING
 
-readFile.c: 10 to do
-correct error string on bad magic number: NOT DONE
-correct error string on bad dimensions (-1): NOT DONE
-correct return on bad dimensions (65536): NOT DONE
-correct error string on bad dimensions (65536): NOT DONE
-correct error string on bad max gray value: NOT DONE
-correct return on large comment: NOT DONE
-correct return on too much data: NOT DONE
-correct output string on too much data: NOT DONE
-correct return on too little data: NOT DONE
-correct output string on too little data: NOT DONE
+readFile.c: 4 to do | 10 to test
+correct error string on bad magic number: NEEDS TESTING
+correct error string on bad dimensions (-1): NEEDS TESTING
+correct return on bad dimensions (65536): NEEDS TESTING
+correct error string on bad dimensions (65536): NEEDS TESTING
+correct error string on bad max gray value: NEEDS TESTING
+correct return on large comment: NEEDS TESTING
+correct return on too much data: NEEDS TESTING FOR ASCII
+correct output string on too much data: NEEDS TESTING FOR ASCII
+correct return on too little data: NEEDS TESTING FOR ASCII
+correct output string on too little data: NEEDS TESTING FOR ASCII
 
 outputFile.c: 2 to do
 correct return on failed malloc: NOT DONE
 pgmEcho correct error string on failed malloc: NOT DONE
+pgmEcho error when outputting comment: NOT DONE
 
 pgmComp.c: 0 to do | 3 to test
 correct message for wrong # of parameters: NEEDS TESTING

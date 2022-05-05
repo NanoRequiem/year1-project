@@ -182,7 +182,6 @@ int readASCIIData(Image *inputImage, FILE *data)
 	//second for loop goes through the columns of the 2d array.
 	while(fscanf(data, " %u",&(inputImage->imageData[y][x])) == 1)
 	{
-		printf("x = %d, y = %d\n", x, y);
 		countRead++;
 		//Validation check on the captured data
 		if(inputImage->imageData[y][x] < 0 ||
