@@ -119,7 +119,7 @@ int writeASCIIData(Image *inputImage, FILE *outputFile)
         writtenData = fprintf(outputFile, " ");
       }
 
-      writtenData = fprintf(outputFile, "%u", inputImage->imageData[x][y]);
+      writtenData = fprintf(outputFile, " %u", inputImage->imageData[x][y]);
     }
     //End of current line so print a new line to file
     writtenData = writtenData + fprintf(outputFile, "\n");

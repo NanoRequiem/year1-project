@@ -1,63 +1,64 @@
-pgmEcho.c: 0 to do | 5 to test
-pgmEcho correct message for wrong # of parameters: NEEDS TESTING
-pgmEcho correct error string with bad filename: NEEDS TESTING
-pgmEcho correct error string for non-readable file: NEEDS TESTING
-pgmEcho correct return on non-writeable file: NEEDS TESTING
-pgmEcho correct error string on non-writeable file: NEEDS TESTING
+pgmEcho.c: 2 to do | 0 to test | 3 done
+pgmEcho correct message for wrong # of parameters: PASSED
+pgmEcho correct error string with bad filename: PASSED
+pgmEcho correct error string for non-readable file: PASSED
+pgmEcho correct return on non-writeable file: FAILED TEST
+pgmEcho correct error string on non-writeable file: FAILED TEST
 
-readFile.c: 4 to do | 10 to test
-correct error string on bad magic number: NEEDS TESTING
-correct error string on bad dimensions (-1): NEEDS TESTING
-correct return on bad dimensions (65536): NEEDS TESTING
-correct error string on bad dimensions (65536): NEEDS TESTING
-correct error string on bad max gray value: NEEDS TESTING
-correct return on large comment: NEEDS TESTING
-correct return on too much data: NEEDS TESTING FOR ASCII
-correct output string on too much data: NEEDS TESTING FOR ASCII
-correct return on too little data: NEEDS TESTING FOR ASCII
-correct output string on too little data: NEEDS TESTING FOR ASCII
+readFile.c: 5 to do | 0 to test | 5 done
+correct error string on bad magic number: PASSED
+correct error string on bad dimensions (-1): PASSED
+correct return on bad dimensions (65536): PASSED
+correct error string on bad dimensions (65536): PASSED
+correct error string on bad max gray value: PASSED
+correct return on large comment: FAILED TEST
+correct return on too much data: FAILED TEST
+correct output string on too much data: FAILED TEST
+correct return on too little data: FAILED TEST
+correct output string on too little data: FAILED TEST
 
-outputFile.c: 2 to do
+outputFile.c: 3 to do
 correct return on failed malloc: NOT DONE
 pgmEcho correct error string on failed malloc: NOT DONE
 pgmEcho error when outputting comment: NOT DONE
 
-pgmComp.c: 0 to do | 3 to test
-correct message for wrong # of parameters: NEEDS TESTING
-correct error string with bad filename: NEEDS TESTING
-correct error string for non-readable file: NEEDS TESTING
+pgmComp.c: 0 to do | 0 to test | 3 done
+correct message for wrong # of parameters: PASSED
+correct error string with bad filename: PASSED
+correct error string for non-readable file: PASSED
 
-pgma2b.c: 0 to do | 7 to test
-correct message for wrong # of parameters: NEEDS TESTING
-correct error string with bad filename: NEEDS TESTING
-correct error string for non-readable file: NEEDS TESTING
-correct return on non-writeable file: NEEDS TESTING
-correct error string on non-writeable file: NEEDS TESTING
-check return code for binary input file: NEEDS TESTING? (in file and successful within my program but failed test)
-check error string for binary input file: NEEDS TESTING? (in file and successful within my program but failed test)
+pgma2b.c: 4 to do | 0 to test | 3 done
+correct message for wrong # of parameters: PASSED
+correct error string with bad filename: PASSED
+correct error string for non-readable file: PASSED
+correct return on non-writeable file: FAILED
+correct error string on non-writeable file: FAILED
+check return code for binary input file: FAILED
+check error string for binary input file: FAILED
 
-pgmb2a.c: 0 to do | 7 to test
-correct message for wrong # of parameters: NEEDS TESTING
-correct error string with bad filename: NEEDS TESTING
-correct error string for non-readable file: NEEDS TESTING
-correct return on non-writeable file: NEEDS TESTING
-correct error string on non-writeable file: NEEDS TESTING
-check return code for ascii input file: NEEDS TESTING? (in file and successful within my program but failed test)
-check error string for ascii input file: NEEDS TESTING? (in file and successful within my program but failed test)
+pgmb2a.c: 4 to do | 0 to test | 4 done
+correct message for wrong # of parameters: PASSED
+correct error string with bad filename: PASSED
+correct error string for non-readable file: PASSED
+correct return on non-writeable file: FAILED
+correct error string on non-writeable file: FAILED
+check return code for ascii input file: FAILED
+check error string for ascii input file: FAILED
+Successfully converts files: PASSED
 
-pgmReduce.c: 3 to do| 7 to test
+pgmReduce.c: 6 to do| 0 to test | 4 done
 correct error string for 1 parameter: NOT DONE (QUESTION ASKED ABOUT THIS)
 correct error string for 2 parameters: NOT DONE (QUESTION ASKED ABOUT THIS)
-correct output string for non-numeric scaling factor: NEEDS TESTING
-correct return code for non-numeric scaling fractor: NEEDS TESTING
-correct output string for negative scaling factor: NEEDS TESTING
-correct return code for negative scaling fractor: NEEDS TESTING
-correct output string for non-readable file: NEEDS TESTING
-correct return on non-writeable file: NEEDS TESTING
-correct error string on non-writeable file: NEEDS TESTING
-successfully downsampling comparison: NOT DONE
+correct output string for non-numeric scaling factor: PASSED
+correct return code for non-numeric scaling fractor: PASSED
+correct output string for negative scaling factor: FAILED
+correct return code for negative scaling fractor: FAILED
+correct output string for non-readable file: PASSED
+correct return on non-writeable file: FAILED
+correct error string on non-writeable file: FAILED
+successfully downsampling comparison: PASSED
 
-
+TOTAL: 22 DONE | 25 to do
 
 
 
