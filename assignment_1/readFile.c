@@ -289,20 +289,40 @@ int ReadRAWData(Image *inputImage, FILE *data)
 	long nImageBytes = inputImage->width * inputImage->height * sizeof(int);
 	inputImage->rawImageData = (int *) malloc(nImageBytes);
 
-	//Loops through list and takes in char value for each position in the list
-	for(int x = 0; x < inputImage->height * inputImage->width; x++)
+	//Count variable to check between expected amount of data read in and actual amount of data read in
+	int countData = 0;
+	int x = 0;
+
+	while(fread(&(inputImage->rawImageData[x]), 1, 1, data) == 1)
 	{
-		//reads in data from the binary file
-		int scanCount = fread(&(inputImage->rawImageData[x]), 1, 1, data);
+		x++;
+		countData++;
 
-		if(scanCount != 1)
-		{
-			printf("ERROR: Bad Data formatting");
-
-			freeImage(inputImage);
-
-			return FAIL_MISC;
+		if(x >= inputImage->width * inputImage->height) {
+			break;
 		}
+	}
+
+	int datacheck = 0;
+
+	//Check that there is no remaining data in the file
+	if(fread(&datacheck, 1, 1, data) == 1)
+	{
+		printf("ERROR: Bad Data ");
+
+		freeImage(inputImage);
+
+		return FAIL_BAD_DATA;
+	}
+
+	//Check that enough data was read in compared to expected
+	if(countData < inputImage->width * inputImage->height)
+	{
+		printf("ERROR: Bad Data ");
+
+		freeImage(inputImage);
+
+		return FAIL_BAD_DATA;
 	}
 
 	//Call function to convert rawData into ImageData
@@ -339,7 +359,7 @@ int rawDataToImageData(Image *inputImage)
 			if(inputImage->imageData[y][b] < 0 ||
 					inputImage->imageData[y][b] > 255)
 			{
-				printf("ERROR: Bad Data");
+				printf("ERROR: Bad Data ");
 
 				freeImage(inputImage);
 

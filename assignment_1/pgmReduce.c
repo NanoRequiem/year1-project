@@ -142,12 +142,11 @@ int initReduced(Image *inputImage, Image *reduce, int factor)
 	return SUCCESS_NO_ERRORS;
 }
 
+//roundNumber method to round the two inputted numbers
 int roundNumber(int numb1, int numb2)
 {
   int divisor = numb1/numb2;
 
-  printf("divisor = %d\n", divisor);
-  printf("divisor / numb2 = %d\nnumb1 = %d\n", divisor / numb2, numb1);
   if(divisor * numb2 == numb1)
   {
     return divisor;
