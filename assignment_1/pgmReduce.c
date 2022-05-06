@@ -136,10 +136,27 @@ int initReduced(Image *inputImage, Image *reduce, int factor)
 	reduce->maxGray = inputImage->maxGray;
 
   //Get the new width and heights for the reduced image
-  reduce->width = inputImage->width/factor + 1;
-  reduce->height = inputImage->height/factor + 1;
+  reduce->width = roundNumber(inputImage->width, factor);
+  reduce->height = roundNumber(inputImage->height, factor);
 
 	return SUCCESS_NO_ERRORS;
+}
+
+int roundNumber(int numb1, int numb2)
+{
+  int divisor = numb1/numb2;
+
+  printf("divisor = %d\n", divisor);
+  printf("divisor / numb2 = %d\nnumb1 = %d\n", divisor / numb2, numb1);
+  if(divisor * numb2 == numb1)
+  {
+    return divisor;
+  }
+
+  else
+  {
+    return divisor + 1;
+  }
 }
 
 //reduce method to actually reduce the image
