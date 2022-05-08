@@ -114,8 +114,8 @@ int main(int argc, char **argv)
 	//output message if the program fails to output a file
 	if(outStatus != 0)
 	{
-		printf("(%s)\n", argv[1]);
-		return outStatus;
+		printf("ERROR: Output Failed (%s)", argv[3]);
+		return FAIL_BAD_OUTPUT;
 	}
 
   printf("REDUCED\n");

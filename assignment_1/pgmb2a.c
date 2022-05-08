@@ -92,7 +92,7 @@ int main(int argc, char **argv)
 	int outStatus = outputImage(inputImage, argv[2]);
 
 	if(outStatus != 0) {
-		printf("ERROR: Output failed (%s)\n", argv[2]);
+		printf("ERROR: Output Failed (%s) ", argv[2]);
 		return FAIL_BAD_OUTPUT;
 	}
 
