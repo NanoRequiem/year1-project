@@ -1,9 +1,9 @@
-pgmEcho.c: 2 to do | 0 to test | 3 done
+pgmEcho.c: 0 to do | 0 to test | 5 done
 pgmEcho correct message for wrong # of parameters: PASSED
 pgmEcho correct error string with bad filename: PASSED
 pgmEcho correct error string for non-readable file: PASSED
-pgmEcho correct return on non-writeable file: FAILED TEST
-pgmEcho correct error string on non-writeable file: FAILED TEST
+pgmEcho correct return on non-writeable file: PASSED
+pgmEcho correct error string on non-writeable file: PASSED
 
 readFile.c: 5 to do | 0 to test | 5 done
 correct error string on bad magic number: PASSED
@@ -27,26 +27,26 @@ correct message for wrong # of parameters: PASSED
 correct error string with bad filename: PASSED
 correct error string for non-readable file: PASSED
 
-pgma2b.c: 4 to do | 0 to test | 3 done
+pgma2b.c: 2 to do | 0 to test | 5 done
 correct message for wrong # of parameters: PASSED
 correct error string with bad filename: PASSED
 correct error string for non-readable file: PASSED
-correct return on non-writeable file: FAILED
-correct error string on non-writeable file: FAILED
+correct return on non-writeable file: PASSED
+correct error string on non-writeable file: PASSSED
 check return code for binary input file: FAILED
 check error string for binary input file: FAILED
 
-pgmb2a.c: 4 to do | 0 to test | 4 done
+pgmb2a.c: 2 to do | 0 to test | 6 done
 correct message for wrong # of parameters: PASSED
 correct error string with bad filename: PASSED
 correct error string for non-readable file: PASSED
-correct return on non-writeable file: FAILED
-correct error string on non-writeable file: FAILED
+correct return on non-writeable file: PASSED
+correct error string on non-writeable file: PASSED
 check return code for ascii input file: FAILED
 check error string for ascii input file: FAILED
 Successfully converts files: PASSED
 
-pgmReduce.c: 6 to do| 0 to test | 4 done
+pgmReduce.c: 4 to do| 0 to test | 6 done
 correct error string for 1 parameter: NOT DONE (QUESTION ASKED ABOUT THIS)
 correct error string for 2 parameters: NOT DONE (QUESTION ASKED ABOUT THIS)
 correct output string for non-numeric scaling factor: PASSED
@@ -54,11 +54,11 @@ correct return code for non-numeric scaling fractor: PASSED
 correct output string for negative scaling factor: FAILED
 correct return code for negative scaling fractor: FAILED
 correct output string for non-readable file: PASSED
-correct return on non-writeable file: FAILED
-correct error string on non-writeable file: FAILED
+correct return on non-writeable file: PASSED
+correct error string on non-writeable file: PASSED
 successfully downsampling comparison: PASSED
 
-TOTAL: 22 DONE | 25 to do
+TOTAL: 30 DONE | 16 to do
 
 
 

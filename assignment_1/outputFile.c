@@ -20,19 +20,19 @@ int outputImage(Image *inputImage, char *outFile)
   //Opening file using user supplied name
   FILE *outputFile = fopen(outFile, "w");
 
+  //Check if the file can be written to and output error message if not
+  if(access(outFile, W_OK) != 0) {
+    printf("ERROR: Miscellaneous (File is non-writable) \n");
+
+    return FAIL_MISC;
+  }
+
   //Validation check on opening file
   if(outputFile == NULL)
   {
     printf("ERROR: Bad File Name (%s)\n", outFile);
     freeImage(inputImage);
     return FAIL_BAD_FNAME;
-  }
-
-  //Check if the file can be written to and output error message if not
-  if(access(outFile, W_OK) != 0) {
-    printf("ERROR: Miscellaneous (File is non-writable) \n");
-
-    return FAIL_MISC;
   }
 
   //Writing magic number, comment line, max gray, height and width values

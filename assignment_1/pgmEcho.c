@@ -77,6 +77,14 @@ int main(int argc, char **argv)
     //Error value obtained from the read image module
 		return readStatus;
 	}
+  else if(readStatus == FAIL_MISC)
+  {
+    //Close file since we've stopped using it due to error
+		fclose(data);
+
+    //Error value obtained from the read image module
+		return readStatus;
+  }
 
 	//Close the file since we have read everything we need from it
 	fclose(data);
