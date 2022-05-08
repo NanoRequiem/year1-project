@@ -27,23 +27,23 @@ correct message for wrong # of parameters: PASSED
 correct error string with bad filename: PASSED
 correct error string for non-readable file: PASSED
 
-pgma2b.c: 2 to do | 0 to test | 5 done
+pgma2b.c: 0 to do | 0 to test | 7 done
 correct message for wrong # of parameters: PASSED
 correct error string with bad filename: PASSED
 correct error string for non-readable file: PASSED
 correct return on non-writeable file: PASSED
 correct error string on non-writeable file: PASSSED
-check return code for binary input file: FAILED
-check error string for binary input file: FAILED
+check return code for binary input file: PASSED
+check error string for binary input file: PASSED
 
-pgmb2a.c: 2 to do | 0 to test | 6 done
+pgmb2a.c: 0 to do | 0 to test | 8 done
 correct message for wrong # of parameters: PASSED
 correct error string with bad filename: PASSED
 correct error string for non-readable file: PASSED
 correct return on non-writeable file: PASSED
 correct error string on non-writeable file: PASSED
-check return code for ascii input file: FAILED
-check error string for ascii input file: FAILED
+check return code for ascii input file: PASSED
+check error string for ascii input file: PASSED
 Successfully converts files: PASSED
 
 pgmReduce.c: 4 to do| 0 to test | 6 done
@@ -58,7 +58,7 @@ correct return on non-writeable file: PASSED
 correct error string on non-writeable file: PASSED
 successfully downsampling comparison: PASSED
 
-TOTAL: 30 DONE | 16 to do
+TOTAL: 34 DONE | 12 to do
 
 
 
