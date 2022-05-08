@@ -11,6 +11,7 @@
 #define SUCCESS_NO_ERRORS 0
 #define FAIL_BAD_ARGS 1
 #define FAIL_BAD_FNAME 2
+#define FAIL_BAD_MAGIC_NUM 3
 #define FAIL_BAD_OUTPUT 9
 #define FAIL_MISC 100
 
@@ -79,9 +80,9 @@ int main(int argc, char **argv)
   //Check that the inputted image is a binary image
   if(inputImage->magicNumber[1] == '2')
   {
-    printf("ERROR: Miscellaneous (ASCII File was inputted when binary file required)");
+    printf("ERROR: Bad Magic Number (%s)", argv[1]);
 
-    return FAIL_MISC;
+    return FAIL_BAD_MAGIC_NUM;
   }
 
   //Changing magic number to be the ASCII magic number
