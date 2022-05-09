@@ -32,7 +32,7 @@ int main(int argc, char **argv)
   //Call method for reading in command line arguments
   if(validateCmdArguments(4, argc) == 1)
 	{
-		printf("ERROR: Bad argument count\n");
+		printf("ERROR: Bad Argument Count ");
 		return FAIL_BAD_ARGS;
 	}
 
@@ -46,7 +46,7 @@ int main(int argc, char **argv)
   }
 
   //Checks if reduction factor is Negative
-  if(argv[2] < 0) {
+  if(argv[2] <= 0) {
     printf("ERROR: Miscellaneous (Negative reduction factor not accepted)");
     return FAIL_MISC;
   }
@@ -62,14 +62,14 @@ int main(int argc, char **argv)
 	//Check if the file has been opened and output error message if not
 	if(data == NULL)
 	{
-		printf("ERROR: Bad File Name(%s)\n", argv[1]);
+		printf("ERROR: Bad File Name (%s)", argv[1]);
 
 		return FAIL_BAD_FNAME;
 	}
 
   //Check if the file can be read and output error message if not
   if(access(argv[1], R_OK)) {
-    printf("ERROR: Miscellaneous (File cannot be read) \n");
+    printf("ERROR: Miscellaneous (File cannot be read) ");
 
     return FAIL_MISC;
   }
