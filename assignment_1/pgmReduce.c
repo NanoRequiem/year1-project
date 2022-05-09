@@ -40,13 +40,13 @@ int main(int argc, char **argv)
   int factor;
 
   //Checks if reduction factor is an integer or not
-  if(!sscanf(argv[2], "%d", &factor)) {
+  if(sscanf(argv[2], "%d", &factor) != 1) {
     printf("ERROR: Miscellaneous (Reduction factor must be an numeric)");
     return FAIL_MISC;
   }
 
   //Checks if reduction factor is Negative
-  if(argv[2] <= 0) {
+  if(factor <= 0) {
     printf("ERROR: Miscellaneous (Negative reduction factor not accepted)");
     return FAIL_MISC;
   }
@@ -96,10 +96,6 @@ int main(int argc, char **argv)
 
   //Initializes the reduced image struct
   Image *reduce = (Image *)malloc( sizeof(Image));
-
-  //Convert argv[2] into and integer to be used
-  //int factor;
-  //sscanf(argv[2], "%d", &factor);
 
   //Calls function to initialise the reduce image Struct's data
   initImage(reduce);
