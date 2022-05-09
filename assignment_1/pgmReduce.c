@@ -83,7 +83,7 @@ int main(int argc, char **argv)
 	//if the data read in was not successful output file name and error code;
 	if(readStatus != 0)
 	{
-		printf("(%s)\n", argv[1]);
+		printf("(%s)", argv[1]);
 
 		//Close file since we've stopped using it due to error
 		fclose(data);

@@ -50,7 +50,7 @@ int outputImage(Image *inputImage, char *outFile)
   }
   else
   {
-    writtenData = fprintf(outputFile, "%c%c\n%s\n\n%d %d\n%d",
+    writtenData = fprintf(outputFile, "%c%c\n%s\n%d %d\n%d\n",
                               inputImage->magicNumber[0],
                               inputImage->magicNumber[1],
                               inputImage->commentLine,
