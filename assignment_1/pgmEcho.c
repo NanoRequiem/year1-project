@@ -69,7 +69,7 @@ int main(int argc, char **argv)
 	if(readStatus != 0 && readStatus != FAIL_MISC)
 	{
 		//Output the file name (readFile module outputs the rest of the error message)
-		printf("(%s)\n", argv[1]);
+		printf("(%s)", argv[1]);
 
 		//Close file since we've stopped using it due to error
 		fclose(data);

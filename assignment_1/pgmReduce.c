@@ -111,12 +111,12 @@ int main(int argc, char **argv)
   //Calling module to output reduced data to a file
 	int outStatus = outputImage(reduce, argv[3]);
 
-	//output message if the program fails to output a file
-	if(outStatus != 0)
-	{
-		printf("ERROR: Output Failed (%s)", argv[3]);
-		return FAIL_BAD_OUTPUT;
-	}
+  //output message if the program fails to output a file
+  if(outStatus != 0)
+  {
+    printf("ERROR: Output Failed (%s) ", argv[3]);
+    return FAIL_BAD_OUTPUT;
+  }
 
   printf("REDUCED\n");
   return SUCCESS_NO_ERRORS;

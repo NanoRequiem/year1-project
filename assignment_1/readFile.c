@@ -94,9 +94,9 @@ int readImageHead(Image *inputImage, FILE *data)
 			commentCount++;
 
 			if(commentCount > 128) {
-				printf("ERROR: Miscellaneous (Comment too large)");
+				printf("ERROR: Bad Comment Line ");
 
-				return FAIL_MISC;
+				return FAIL_BAD_COMMENT_LINE;
 			}
 		}
 	}
