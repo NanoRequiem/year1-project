@@ -12,10 +12,10 @@ correct return on bad dimensions (65536): PASSED
 correct error string on bad dimensions (65536): PASSED
 correct error string on bad max gray value: PASSED
 correct return on large comment: PASSED
-correct return on too much data: FAILED TEST (Works with pgmb2a)
-correct output string on too much data: FAILED TEST (Works with pgmb2a)
-correct return on too little data: FAILED TEST (Works with pgmb2a)
-correct output string on too little data: FAILED TEST (Works with pgmb2a)
+correct return on too much data: PASSED
+correct output string on too much data: PASSED
+correct return on too little data: PASSED
+correct output string on too little data: PASSED
 
 outputFile.c: 0 to do | 3 done
 correct return on failed malloc: PASSED
@@ -35,6 +35,7 @@ correct return on non-writeable file: PASSED
 correct error string on non-writeable file: PASSSED
 check return code for binary input file: PASSED
 check error string for binary input file: PASSED
+Successfully converts files: PASSED
 
 pgmb2a.c: 0 to do | 0 to test | 8 done
 correct message for wrong # of parameters: PASSED
@@ -56,9 +57,9 @@ correct return code for negative scaling fractor: PASSED
 correct output string for non-readable file: PASSED
 correct return on non-writeable file: PASSED
 correct error string on non-writeable file: PASSED
-successfully downsampling comparison: FAILS NOW? PASSES NOW? (I have no clue)
+successfully downsampling comparison: FAILS NOW? PASSES NOW? (I have no clue) FAILS NOW AGAIN??? PASSED AGAIN!
 
-TOTAL: 41 DONE | 4 to do
+TOTAL: 46 DONE | 0 to do
 
 
 
