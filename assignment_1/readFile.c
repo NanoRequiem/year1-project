@@ -192,14 +192,14 @@ int readASCIIData(Image *inputImage, FILE *data)
 	int x = 0;
 	int y = 0;
 	//Value to count the amount read
-	int countRead = 0;
+	int countData = 0;
 
 	//For loop that goes through all of the image's data and saves it
 	//First for loop goes through the rows of the 2d array where as the
 	//second for loop goes through the columns of the 2d array.
-	while(fscanf(data, " %u",&(inputImage->imageData[y][x])) == 1)
+	while(fscanf(data, " %u",&(inputImage->imageData[x][y])) == 1)
 	{
-		countRead++;
+		countData++;
 		//Validation check on the captured data
 		if(inputImage->imageData[y][x] < 0 ||
 				inputImage->imageData[y][x] > 255)
@@ -210,53 +210,36 @@ int readASCIIData(Image *inputImage, FILE *data)
 
 			return FAIL_BAD_DATA;
 		}
+
+		x++;
 		//iterate over counter variables
-		if(x >= inputImage->width - 1)
+		if(x == inputImage->width)
 		{
 			x = 0;
 			y++;
 
-			//Check that once the program should get to the end of a line it actually does
-			char nextChar = getc(data);
-			if(nextChar != '\n')
-			{
-				printf("ERROR: Bad Data ");
-
-				freeImage(inputImage);
-
-				return FAIL_BAD_DATA;
-			}
-
 			//ensure that a segmentation fault does not occur
-			if(y >= inputImage->height)
+			if(y == inputImage->height)
 			{
 				break;
 			}
-		}
-		else
-		{
-			x++;
 		}
 	}
 
 	int datacheck = 0;
 
 	//Check that there is no remaining data in the file
-	if(fscanf(data, " %u", &datacheck) == 1)
+	if(fscanf(data," %u", &datacheck) == 1)
 	{
 		printf("ERROR: Bad Data ");
-
-		freeImage(inputImage);
 
 		return FAIL_BAD_DATA;
 	}
 
-	//check that enough data was read in
-	if(countRead < inputImage->width * inputImage->height)
+	//Check that enough data was read in compared to expected
+	if(countData < inputImage->width * inputImage->height)
 	{
 		printf("ERROR: Bad Data ");
-
-		freeImage(inputImage);
 
 		return FAIL_BAD_DATA;
 	}
