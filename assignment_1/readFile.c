@@ -197,7 +197,7 @@ int readASCIIData(Image *inputImage, FILE *data)
 	//For loop that goes through all of the image's data and saves it
 	//First for loop goes through the rows of the 2d array where as the
 	//second for loop goes through the columns of the 2d array.
-	while(fscanf(data, " %u",&(inputImage->imageData[x][y])) == 1)
+	while(fscanf(data, " %u",&(inputImage->imageData[y][x])) == 1)
 	{
 		countData++;
 		//Validation check on the captured data
