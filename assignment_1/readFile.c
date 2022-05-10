@@ -12,6 +12,7 @@
 #define FAIL_BAD_COMMENT_LINE 4
 #define FAIL_BAD_DIMENSIONS 5
 #define FAIL_BAD_MAX_GRAY 6
+#define FAIL_BAD_MALLOC 7
 #define FAIL_BAD_DATA 8
 #define FAIL_MISC 100
 
@@ -165,10 +166,26 @@ int readASCIIData(Image *inputImage, FILE *data)
 	//Initializing the rows of the 2D array to store the image data
 	inputImage->imageData = (int**)malloc(inputImage->height * sizeof(int*));
 
+	//Check malloc occured
+	if(inputImage->imageData == NULL)
+	{
+		printf("ERROR: Image Malloc Failed ");
+		freeImage(inputImage);
+		return FAIL_BAD_MALLOC;
+	}
+
 	//For loop to initialize the columns of the array
 	for(int x = 0; x < inputImage->height; x++)
 	{
 		inputImage->imageData[x] = (int*)malloc(inputImage->width * sizeof(int));
+
+		//Check malloc occured
+		if(inputImage->imageData[x] == NULL)
+		{
+			printf("ERROR: Image Malloc Failed ");
+			freeImage(inputImage);
+			return FAIL_BAD_MALLOC;
+		}
 	}
 
 	//values to index the 2D array
@@ -265,6 +282,13 @@ int saveRAWData(Image *InputImage)
 	long nImageBytes = InputImage->width * InputImage->height * sizeof(int);
 	InputImage->rawImageData = (int *) malloc(nImageBytes);
 
+	if(InputImage->rawImageData == NULL)
+	{
+		printf("ERROR: Image Malloc Failed ");
+		freeImage(InputImage);
+		return FAIL_BAD_MALLOC;
+	}
+
 	//count value for rawImageData
 	int rawImageCount = 0;
 
@@ -288,6 +312,13 @@ int ReadRAWData(Image *inputImage, FILE *data)
 	//initialize rawImageData
 	long nImageBytes = inputImage->width * inputImage->height * sizeof(int);
 	inputImage->rawImageData = (int *) malloc(nImageBytes);
+
+	if(inputImage->rawImageData == NULL)
+	{
+		printf("ERROR: Image Malloc Failed ");
+		freeImage(inputImage);
+		return FAIL_BAD_MALLOC;
+	}
 
 	//Count variable to check between expected amount of data read in and actual amount of data read in
 	int countData = 0;
