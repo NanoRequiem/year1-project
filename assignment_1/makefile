@@ -17,6 +17,7 @@ all:
 			${CC}	${CCFLAGS}	-o pgma2b	 pgma2b.c readFile.c outputFile.c freeData.c
 			${CC}	${CCFLAGS}	-o pgmb2a	 pgmb2a.c readFile.c outputFile.c freeData.c
 			${CC}	${CCFLAGS}	-o pgmReduce pgmReduce.c readFile.c outputFile.c freeData.c
+			${CC} ${CCFLAGS}  -o pgmTile pgmTile.c readFile.c outputFile.c freeData.c
 
 #Second target to make pgmEcho
 pgmEcho:
@@ -38,7 +39,11 @@ pgmb2a:
 pgmReduce:
 			${CC}	${CCFLAGS}	-o pgmReduce pgmReduce.c readFile.c outputFile.c freeData.c
 
+#Seventh target to make pgmTile
+pgmTile:
+			${CC} ${CCFLAGS}  -o pgmTile pgmTile.c readFile.c outputFile.c freeData.c
+
 
 #Second target to clean
 clean:
-				rm pgmEcho pgmComp pgma2b pgmb2a pgmReduce
+				rm pgmEcho pgmComp pgma2b pgmb2a pgmReduce pgmTile
