@@ -121,14 +121,14 @@ int main(int argc, char **argv)
 //initReduced method for initializing the reduced file
 int initReduced(Image *inputImage, Image *reduce, int factor)
 {
-  //Initializes magic number with a 0 character meaning NULL
+  //Initializes magic number as input magic number
 	reduce->magicNumber[0] = inputImage->magicNumber[0];
 	reduce->magicNumber[1] = inputImage->magicNumber[1];
 
-	//Initializes commentLine as NULL
+	//Initializes commentLine as input commentLine
 	reduce->commentLine = inputImage->commentLine;
 
-	//Initializes data header variables as default variables
+	//Initializes data header variables as input maxGray
 	reduce->maxGray = inputImage->maxGray;
 
   //Get the new width and heights for the reduced image
