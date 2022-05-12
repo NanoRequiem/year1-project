@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "imageStructures.h"
+#include "stringManip.h"
 #include "readFile.h"
 #include "outputFile.h"
 #include "pgmTile.h"
@@ -33,6 +34,11 @@ int main(int argc, char **argv)
   {
     printf("ERROR: Bad Argument Count \n");
     return FAIL_BAD_ARGS;
+  }
+
+  if(checkTemplate(argv[3]) != 0)
+  {
+    return FAIL_MISC;
   }
 
   //Create the image structure
@@ -103,14 +109,14 @@ int main(int argc, char **argv)
 	//Close the file since we have read everything we need from it
 	fclose(data);
 
-  newImageInit(inputImage, factor);
+  newImageInit(inputImage, factor, argv[3]);
 
-  //Calling module to output read in data to a file
-	outputImage(inputImage, argv[3]);
+  printf("TILED");
+  return 0;
 }
 
 //Initializes the new image structs for the tiled imageStructures
-int newImageInit(Image *inputImage, int tileFactor)
+int newImageInit(Image *inputImage, int tileFactor, char *outImageName)
 {
   //Initialize 2d image list for the output
   Image **outputImages = (Image **)malloc(tileFactor * sizeof(Image));
@@ -123,6 +129,8 @@ int newImageInit(Image *inputImage, int tileFactor)
   {
     for(int y = 0; y < tileFactor; y++)
     {
+      char *outTitle = (char *)malloc((strlen(outImageName) - 11) * sizeof(char));
+
       //copy magic number from input image
       outputImages[x][y].magicNumber[0] = inputImage->magicNumber[0];
       outputImages[x][y].magicNumber[1] = inputImage->magicNumber[1];
@@ -141,9 +149,11 @@ int newImageInit(Image *inputImage, int tileFactor)
 
       getTileData(x * outputImages[x][y].width, y * outputImages[x][y].height, inputImage, &outputImages[x][y]);
 
+      getOutputName(outImageName, outTitle, x, y);
+
       //Calling module to output read in data to a file
       saveRAWData(&outputImages[x][y]);
-    	outputImage(&outputImages[x][y], "lmao.pgm");
+    	outputImage(&outputImages[x][y], outTitle);
     }
   }
   return 0;
