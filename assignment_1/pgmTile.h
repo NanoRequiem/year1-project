@@ -8,7 +8,7 @@
 //argv[2] = name of image file to be outputted
 int main(int argc, char **argv);
 
-int newImageInit(Image *inputImage, int tileFactor);
+int newImageInit(Image *inputImage, int tileFactor, char *outImageName);
 
 int initOutImageData(Image *outImage);
 

@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+
+#include "stringManip.h"
+
+int checkTemplate(char *inputString)
+{
+  char *contain;
+
+  //Check if the template given is correct
+  contain = strstr(inputString, "_<row>_<column>");
+
+  //Output correct message depending on if the template is correct
+  if(contain)
+  {
+    return 0;
+  }
+  else
+  {
+    printf("ERROR: Miscellaneous (Incorrect output file template)");
+
+    return 100;
+  }
+}
+
+int getOutputName(char *outputTemplate, char *outputName, int x, int y)
+{
+  //Initialize values to hold string versions of x and y
+  char output[7];
+
+  //Capture X and Y as a string
+  sprintf(output, "%d_%d.pgm", x, y);
+
+  //add X and Y to the Template with the .pgm file ending
+  for(int z = 0; z < strlen(outputTemplate); z++)
+  {
+    if(outputTemplate[z] == '<')
+    {
+      break;
+    }
+    else
+    {
+      outputName[z] = outputTemplate[z];
+    }
+  }
+
+  strcat(outputName, output);
+
+  return 0;
+}
