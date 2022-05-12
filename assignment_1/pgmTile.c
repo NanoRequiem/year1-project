@@ -137,23 +137,44 @@ int newImageInit(Image *inputImage, int tileFactor)
       outputImages[x][y].height = inputImage->height / tileFactor;
       outputImages[x][y].width = inputImage->width / tileFactor;
 
-      getTileData(x * tileFactor, y * tileFactor, outputImages[x][y].height, outputImages[x][y].width);
+      initOutImageData(&outputImages[x][y]);
+
+      getTileData(x * outputImages[x][y].width, y * outputImages[x][y].height, inputImage, &outputImages[x][y]);
+
+      //Calling module to output read in data to a file
+      saveRAWData(&outputImages[x][y]);
+    	outputImage(&outputImages[x][y], "lmao.pgm");
     }
   }
   return 0;
 }
 
-//Gets the data held within each tileFactor
-int getTileData(int XOffset, int YOffset, int height, int width)
+int initOutImageData(Image *outImage)
 {
-  for(int x = XOffset; x - XOffset < width; x++)
+  //Initializing the rows of the 2D array to store the image data
+  outImage->imageData = (int**)malloc(outImage->height * sizeof(int*));
+
+  for(int x = 0; x < outImage-> width; x++)
   {
-    for(int y = YOffset; y - YOffset < height; y++)
+    outImage->imageData[x] = (int *)malloc(outImage-> width * sizeof(int));
+  }
+
+  return 0;
+}
+
+//Gets the data held within each tileFactor
+//XOffset and YOffset to make sure we capture the correct data from the correct area
+int getTileData(int XOffset, int YOffset, Image *inputImage, Image *outImage)
+{
+  //Loops through the width of the data
+  for(int x = XOffset; x - XOffset < outImage->width; x++)
+  {
+    //loops through the height of the data
+    for(int y = YOffset; y - YOffset < outImage->height; y++)
     {
-      printf("X = %d, Y = %d\n", x, y);
+      outImage->imageData[x - XOffset][y - YOffset] = inputImage->imageData[x][y];
     }
   }
-  printf("New file ------\n");
 
   return 0;
 }

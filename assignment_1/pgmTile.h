@@ -10,4 +10,6 @@ int main(int argc, char **argv);
 
 int newImageInit(Image *inputImage, int tileFactor);
 
-int getTileData(int XOffset, int YOffset, int height, int width);
+int initOutImageData(Image *outImage);
+
+int getTileData(int XOffset, int YOffset, Image *inputImage, Image *outImage);
