@@ -129,7 +129,7 @@ int newImageInit(Image *inputImage, int tileFactor, char *outImageName)
   {
     for(int y = 0; y < tileFactor; y++)
     {
-      char *outTitle = (char *)malloc((strlen(outImageName) - 11) * sizeof(char));
+      char *outTitle = (char *)malloc(strlen(outImageName) * sizeof(char));
 
       //copy magic number from input image
       outputImages[x][y].magicNumber[0] = inputImage->magicNumber[0];

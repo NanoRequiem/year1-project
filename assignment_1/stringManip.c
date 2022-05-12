@@ -25,13 +25,14 @@ int checkTemplate(char *inputString)
   }
 }
 
+
 int getOutputName(char *outputTemplate, char *outputName, int x, int y)
 {
   //Initialize values to hold string versions of x and y
-  char output[7];
+  char *outX = (char *)malloc(10 * sizeof(char));
 
   //Capture X and Y as a string
-  sprintf(output, "%d_%d.pgm", x, y);
+  sprintf(outX, "%d_%d.pgm", x, y);
 
   //add X and Y to the Template with the .pgm file ending
   for(int z = 0; z < strlen(outputTemplate); z++)
@@ -46,7 +47,9 @@ int getOutputName(char *outputTemplate, char *outputName, int x, int y)
     }
   }
 
-  strcat(outputName, output);
+  strcat(outputName, outX);
+
+  printf("%s\n", outputName);
 
   return 0;
 }
