@@ -24,7 +24,7 @@ int main(int argc, char **argv)
   //If no arguments are supplied output the correct arguments
   if(argc == 1)
   {
-    printf("Usage: ./pgmTile inputImage.pgm tiling_factor outputImage_<row>_<column>.pgm");
+    printf("Usage: ./pgmAssemble outputImage.pgm width height (row column inputImage.pgm)+");
     return 0;
   }
 
