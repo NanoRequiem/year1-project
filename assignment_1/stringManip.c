@@ -49,7 +49,5 @@ int getOutputName(char *outputTemplate, char *outputName, int x, int y)
 
   strcat(outputName, outX);
 
-  printf("%s\n", outputName);
-
   return 0;
 }
