@@ -12,6 +12,12 @@ int checkTemplate(char *inputString)
   //Check if the template given is correct
   contain = strstr(inputString, "_<row>_<column>");
 
+  //if(access(argv[3], W_OK) != 0) {
+  //  printf("ERROR: Output Failed ");
+
+  //  return FAIL_BAD_OUTPUT;
+  //}
+
   //Output correct message depending on if the template is correct
   if(contain)
   {

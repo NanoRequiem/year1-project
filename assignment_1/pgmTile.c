@@ -36,6 +36,8 @@ int main(int argc, char **argv)
     return FAIL_BAD_ARGS;
   }
 
+  //Check that the template is a writable file
+  //Check if the file can be written to and output error message if not
   if(checkTemplate(argv[3]) != 0)
   {
     return FAIL_MISC;

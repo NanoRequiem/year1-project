@@ -22,9 +22,8 @@ int outputImage(Image *inputImage, char *outFile)
 
   //Check if the file can be written to and output error message if not
   if(access(outFile, W_OK) != 0) {
-    printf("ERROR: Miscellaneous (File is non-writable) \n");
 
-    return FAIL_MISC;
+    return FAIL_BAD_OUTPUT;
   }
 
   //Validation check on opening file

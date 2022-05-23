@@ -36,8 +36,8 @@ int main(int argc, char **argv)
     return FAIL_BAD_ARGS;
   }
 
-  int numbOfImage = (argc - 3) / 3;
-  int fileNameIndex = 5;
+  int numbOfImage = (argc - 4) / 3;
+  int fileNameIndex = 6;
 
   Image **ImageList = (Image **)malloc(numbOfImage * sizeof(Image));
 
