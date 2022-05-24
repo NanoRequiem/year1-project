@@ -141,13 +141,15 @@ int initReduced(Image *inputImage, Image *reduce, int factor)
 //roundNumber method to round the two inputted numbers
 int roundNumber(int numb1, int numb2)
 {
+  //Finding the division of both numbers
   int divisor = numb1/numb2;
 
+  //If the number is an integer division it will be the same so will not require rounding
   if(divisor * numb2 == numb1)
   {
     return divisor;
   }
-
+  //If it does not it will require rounding
   else
   {
     return divisor + 1;

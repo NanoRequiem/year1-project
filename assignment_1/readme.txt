@@ -14,3 +14,5 @@ pgmComp - ./pgmComp inputImage.pgm inputImage.pgm
 pgma2b - ./pgma2b inputImage.pgm outputImage.pgm
 pgmb2a - ./pgmb2a inputImage.pgm outputImage.pgm
 pgmReduce - ./pgmReduce inputImage.pgm reduction_factor outputImage.pgm
+pgmTile - ./pgmTile inputImage.pgm tiling_factor outputImage_<row>_<column>.pgm
+pgmReduce - ./pgmAssemble outputImage.pgm width height (row column inputImage.pgm)+

@@ -12,6 +12,7 @@ int main(int argc, char **argv);
 //reduced = Reduced image
 int initReduced(Image *inputImage, Image *reduce, int factor);
 
+//Used to divide and round two numbers
 int roundNumber(int numb1, int numb2);
 
 //reduce method to actually reduce the image
